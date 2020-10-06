@@ -1,5 +1,7 @@
 name: Travis CI
 
+language: php
+
 on:
   push:
     branches: [ main ]
