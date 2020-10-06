@@ -5,7 +5,7 @@
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/ec052bb76a0047e78c2c0770e0ae9c91)](https://www.codacy.com/gh/jestin-g/finDo/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=jestin-g/finDo&amp;utm_campaign=Badge_Grade)
 
 ## Setup
-Check server requirement [here](https://laravel.com/docs/7.x/installation#installation).
+Make sure you have [Composer](https://getcomposer.org/) installed on your machine and check server requirement [here](https://laravel.com/docs/7.x/installation#installation).
 
 Clone repository
 
