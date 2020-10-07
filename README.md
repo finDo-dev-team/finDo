@@ -13,7 +13,7 @@ Clone repository
 
 Go to the created folder
 
-    cd gestionnaire-groupes-php-l3-miage
+    cd findo
 
 Install composer dependencies
 
