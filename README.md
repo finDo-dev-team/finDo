@@ -38,6 +38,10 @@ Compile assets
 Migrate database
 
     php artisan migrate
+
+Seed database
+
+    php artisan db:seed
     
 Launch local development server
 
