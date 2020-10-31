@@ -15,4 +15,14 @@ class HomeController extends Controller
             'events' => $events
         ]);
     }
+
+    public function showCarte()
+    {
+        return Inertia::render('Map');
+    }
+
+    public function showCard()
+    {
+        return view('map');
+    }
 }

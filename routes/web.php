@@ -20,6 +20,8 @@ use App\Http\Controllers\HomeController;
 // });
 
 Route::get('/', [HomeController::class, 'index']);
+Route::get('/carte',  [HomeController::class, 'showCarte']);
+Route::get('/card',  [HomeController::class, 'showCard']);
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return Inertia::render('Dashboard');
