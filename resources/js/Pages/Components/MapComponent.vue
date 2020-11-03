@@ -9,7 +9,7 @@
 
 <script>
 
-import OpenStreetMapProvider from 'leaflet-geosearch'
+// import OpenStreetMapProvider from 'leaflet-geosearch'
 export default {
 
    methods:{

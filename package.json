@@ -27,6 +27,6 @@
     },
     "dependencies": {
         "leaflet-geosearch": "^3.0.6"
-    }
+    },
     "name": "finDo"
 }
