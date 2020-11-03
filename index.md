@@ -1,1 +1,1 @@
-bonjour
+Notre projet est une application web permettant aux utilisateurs de consulter toutes les activités disponibles près de chez lui (culture, divertissement, sport…). Celle-ci permettra de mettre en relation des personnes résidant dans un même périmètre et si affinité, la possibilité de créer des groupes privés ou encore d’organiser leur propre événement.  
