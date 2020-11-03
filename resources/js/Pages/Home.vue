@@ -14,7 +14,7 @@
         <div class="mt-10">
           <ul>
             <li class="mb-6">
-              <a href="">
+              <a href="/map">
                 <span>
                   <svg
                     class="fill-current h-10 w-10 text-gray-300 mx-auto hover:text-red-300 transition-color duration-500"
@@ -54,6 +54,7 @@
           </ul>
         </div>
       </div>
+      <!-- Servira plus tard pour la déconnexion
       <div class="mb-4">
         <a href="#">
           <span>
@@ -75,6 +76,7 @@
           </span>
         </a>
       </div>
+      -->
     </nav>
     <div class="px-16 py-4 text-gray-700 bg-gray-100 h-screen w-screen">
       <!-- Content -->
