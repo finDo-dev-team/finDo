@@ -16,13 +16,10 @@ class HomeController extends Controller
         ]);
     }
 
-    public function showCarte()
+    public function showMap()
     {
         return Inertia::render('Map');
     }
 
-    public function showCard()
-    {
-        return view('map');
-    }
+
 }

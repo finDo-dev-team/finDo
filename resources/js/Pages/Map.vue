@@ -1,22 +1,18 @@
 <template>
     <div>
         <br/><br/>
-            <card></card>
+            <map-component></map-component>
         <br/><br/>
     </div>
 </template>
 <script>
-import Card from './Components/Card'
+import MapComponent from './Components/MapComponent'
 export default {
 
     components:{
-        Card
+        MapComponent
     }
 }
 </script>
-<style scoped>
-    #carte{
-        padding-top: 50em;
-    }
-</style>
+
 

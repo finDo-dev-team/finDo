@@ -2,28 +2,25 @@
   <div>
   <div id="map">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.1.0/leaflet.css"/>
-    <button @click="afficheMap">carte</button>
+    <button @click="show">Map</button>
   </div>
   </div>
 </template>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.1.0/leaflet.js" type="text/javascript"></script>
+
 <script>
 
-import {GeoSearchControl, OpenStreetMapProvider } from 'leaflet-geosearch'
-
+import OpenStreetMapProvider from 'leaflet-geosearch'
 export default {
-
 
    methods:{
 
-        afficheMap: function() {
+        show: function() {
 
-        const map = L.map('map').setView([48.83169295,2.36078477], 13);
-        L.tileLayer('//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
-
-        var fes = L.marker([48.83463210, 2.36332710]).addTo(map);
-
-        return map;
+            var map = L.map('map').setView([47.8316,2.36078477], 13);
+            L.tileLayer('//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+            var fes = L.marker([48.83463210, 2.36332710]).addTo(map);
+            map.locate(({setView: true, maxZoom: 14}));
+            return map;
 
         }
    }
