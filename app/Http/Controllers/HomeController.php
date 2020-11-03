@@ -15,4 +15,11 @@ class HomeController extends Controller
             'events' => $events
         ]);
     }
+
+    public function showMap()
+    {
+        return Inertia::render('Map');
+    }
+
+
 }
