@@ -1,5 +1,6 @@
 <template>
   <div class="flex flex-row h-full w-full">
+
     <!-- Sidebar -->
     <nav class="bg-gray-100 w-20 justify-between flex flex-col shadow-inner">
       <div class="mt-10 mb-10">
@@ -81,7 +82,13 @@
     <div class="px-16 py-4 text-gray-700 bg-gray-100 h-screen w-screen">
       <!-- Content -->
       <h1 class="text-4xl text-red-300">FinDo</h1>
-      <h2 class="text-2xl">Evénements à venir</h2>
+      <h2 class="text-2xl">Evénements </h2>
+
+      <search-component>
+        <template slot="search">
+        </template>
+      </search-component>
+
       <div v-for="event in this.eventList" v-bind:key="event.id">
         <div class="max-w-sm rounded overflow-hidden shadow-lg">
           <div class="px-6 py-4">
@@ -105,18 +112,34 @@
   </div>
 </template>
 
+
+
 <script>
+//import { component } from 'vue/types/umd';
+import SearchComponent from './Components/SearchComponent';
+
 export default {
+
+  
+
   props: ["events"],
 
   data() {
     return {
-      eventList: this.events,
+      eventList: this.events
     };
   },
 
   mounted() {
     console.log(this.eventList);
   },
+
+  components:{
+
+    SearchComponent
+
+  }
 };
+
+  
 </script>
