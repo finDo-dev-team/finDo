@@ -18,6 +18,8 @@ class DatabaseSeeder extends Seeder
     {
         Event::factory(17)->create();
         EventType::factory(4)->create();
+
+        /* On les ajoute un a un pour ne pas provquer d'erreur en tentant de créer un doublon */
         for ($i = 0; $i < 30; $i++) {
             EventEventType::factory(1)->create();
         }
