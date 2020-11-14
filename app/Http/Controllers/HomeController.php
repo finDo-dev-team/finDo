@@ -13,7 +13,6 @@ class HomeController extends Controller
             ->whereDate('date', '>=', date('Y-m-d'))
             ->get()
             ->take(3);
-        dd($events);
         return Inertia::render('Home', [
             'events' => $events
         ]);
