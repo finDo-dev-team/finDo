@@ -21,13 +21,17 @@ use App\Http\Controllers\SearchController;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
+Route::get('/', [HomeController::class, 'index'])->name('index');
 
+/*
 Route::get('/{q?}', [HomeController::class, 'index'])->name('index');
 
 Route::get('/search/{q?}', [SearchController::class, 'index']);
 
 
 Route::get('/search', [SearchController::class, 'index']);
+
+*/
 
 Route::get('/map',  [HomeController::class, 'showMap']);
 Route::get('/events', [EventController::class, 'index']);
