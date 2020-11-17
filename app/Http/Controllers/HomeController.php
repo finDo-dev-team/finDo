@@ -13,9 +13,7 @@ class HomeController extends Controller
             ->whereDate('date', '>=', date('Y-m-d'))
             ->get()
             ->take(3);
-        return Inertia::render('Home', [
-            'events' => $events
-        ]);
+        return Inertia::render('Home', compact('events'));
     }
 
     public function showMap()
