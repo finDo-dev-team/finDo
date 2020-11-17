@@ -1,6 +1,8 @@
 <template>
-  <div>
-    <h1 class="text-4xl text-red-300">FinDo</h1>
+  <app-layout>
+    <template #header>
+      <h1 class="font-semibold text-xl text-gray-800 leading-tight">FinDo</h1>
+    </template>
     <h2 class="text-2xl">Evénements à venir</h2>
     <div v-for="event in this.eventList" v-bind:key="event.id">
       <div class="max-w-sm rounded overflow-hidden shadow-lg">
@@ -21,11 +23,16 @@
         </div>
       </div>
     </div>
-  </div>
+  </app-layout>
 </template>
 
 <script>
+import AppLayout from "../Layouts/AppLayout.vue";
 export default {
+  components: {
+    AppLayout,
+  },
+
   props: ["events"],
 
   data() {
