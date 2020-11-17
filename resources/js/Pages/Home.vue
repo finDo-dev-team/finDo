@@ -1,4 +1,5 @@
 <template>
+
   <div class="flex flex-row h-full w-full">
 
     <!-- Sidebar -->
@@ -84,12 +85,16 @@
       <h1 class="text-4xl text-red-300">FinDo</h1>
       <h2 class="text-2xl">Evénements </h2>
 
-      <search-component>
-        <template slot="search">
-        </template>
-      </search-component>
+   
+       <input type="text"  class="form-control"  @keyup="searchEvents" v-model="q" placeholder="Rechercher un évenement"  >
+       
 
-      <div v-for="event in this.eventList" v-bind:key="event.id">
+       <search-component> 
+        <template slot="search"> </template>
+       </search-component>
+
+
+      <div v-for="event in eventList" v-bind:key="event.id">
         <div class="max-w-sm rounded overflow-hidden shadow-lg">
           <div class="px-6 py-4">
             <p class="text-gray-600 text-xs">
@@ -126,9 +131,44 @@ export default {
 
   data() {
     return {
-      eventList: this.events
+      eventList: this.events,
+      q: '',
     };
   },
+
+  methods : {
+ 
+ 
+  searchEvents(){
+  
+    if(this.q.length > 0)
+    {
+      axios.get("/search/" + this.q)
+      .then( response => this.eventList = response.data)
+      .catch(error => console.log(error));
+    }
+    else
+    {
+      this.eventList= this.events;
+     
+    }
+
+  }
+    
+  },
+
+
+  computed: {
+     /* getFilteredEvents (){
+
+        return this.eventList.filter( event =>{
+          return event.title.toLowerCase().includes(this.q.toLowerCase());
+        }
+
+        )
+      }
+*/
+  }, 
 
   mounted() {
     console.log(this.eventList);
@@ -138,8 +178,8 @@ export default {
 
     SearchComponent
 
-  }
-};
+  },
+}
 
   
 </script>
