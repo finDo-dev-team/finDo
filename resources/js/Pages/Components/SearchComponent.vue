@@ -5,7 +5,7 @@
     <slot name="search">
     
     <input type="text"  class="form-control" v-model="q" placeholder="Rechercher un évenement">
-    <a :href="'/' + q"> Rechercher </a>
+    <a :href="'/search/' + q"> Rechercher </a>
 
     </slot>
   </div>
@@ -14,7 +14,6 @@
 
 
 <script>
-
 
 
 
