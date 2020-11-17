@@ -21,6 +21,7 @@ use App\Http\Controllers\SearchController;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
+Route::get('/', [HomeController::class, 'index'])->name('index');
 
 Route::get('/', [HomeController::class, 'index'])->name('index');
 

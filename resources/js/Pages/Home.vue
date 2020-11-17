@@ -57,8 +57,5 @@ export default {
   mounted() {
     console.log(this.eventList);
   },
-
-}
-
-  
+};
 </script>
