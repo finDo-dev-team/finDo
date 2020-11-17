@@ -1,6 +1,8 @@
 <template>
-  <div>
-    <h1 class="text-4xl text-red-300">FinDo</h1>
+  <app-layout>
+    <template #header>
+      <h1 class="font-semibold text-xl text-gray-800 leading-tight">FinDo</h1>
+    </template>
     <h2 class="text-2xl">Evénements à venir</h2>
      <input type="text"  class="form-control"  @keyup="searchEvents" v-model="q" placeholder="Rechercher un évenement"  >
        <search-component> 
@@ -28,17 +30,20 @@
         </div>
       </div>
     </div>
-  </div>
+  </app-layout>
 </template>
 
 
 
 <script>
+import AppLayout from "../Layouts/AppLayout.vue";
 import SearchComponent from './Components/SearchComponent';
 
 export default {
-
-  
+  components: {
+    AppLayout,
+    SearchComponent,
+  },
 
   props: ["events"],
 
@@ -74,11 +79,6 @@ export default {
     console.log(this.eventList);
   },
 
-  components:{
-
-    SearchComponent
-
-  },
 }
 
   
