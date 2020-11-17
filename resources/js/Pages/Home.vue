@@ -2,6 +2,10 @@
   <div>
     <h1 class="text-4xl text-red-300">FinDo</h1>
     <h2 class="text-2xl">Evénements à venir</h2>
+     <input type="text"  class="form-control"  @keyup="searchEvents" v-model="q" placeholder="Rechercher un évenement"  >
+       <search-component> 
+        <template slot="search"> </template>
+       </search-component>
     <div v-for="event in this.eventList" v-bind:key="event.id">
       <div class="max-w-sm rounded overflow-hidden shadow-lg">
         <div class="px-6 py-4">
@@ -19,12 +23,7 @@
             >{{ event.location }}</span
           >
    
-       <input type="text"  class="form-control"  @keyup="searchEvents" v-model="q" placeholder="Rechercher un évenement"  >
-       
-
-       <search-component> 
-        <template slot="search"> </template>
-       </search-component>
+      
 
         </div>
       </div>
@@ -35,7 +34,6 @@
 
 
 <script>
-//import { component } from 'vue/types/umd';
 import SearchComponent from './Components/SearchComponent';
 
 export default {
@@ -53,10 +51,9 @@ export default {
 
   methods : {
  
- 
-  searchEvents(){
+ searchEvents(){
   
-    if(this.q.length > 0)
+    if(this.q.length > 1)
     {
       axios.get("/search/" + this.q)
       .then( response => this.eventList = response.data)
@@ -67,22 +64,10 @@ export default {
       this.eventList= this.events;
      
     }
-
-  }
-    
+  
   },
 
-
-  computed: {
-     /* getFilteredEvents (){
-
-        return this.eventList.filter( event =>{
-          return event.title.toLowerCase().includes(this.q.toLowerCase());
-        }
-
-        )
-      }
-*/
+     
   }, 
 
   mounted() {
