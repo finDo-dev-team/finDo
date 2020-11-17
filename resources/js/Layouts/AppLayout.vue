@@ -82,7 +82,7 @@
       <!-- Content -->
       <!-- Page Heading -->
       <header>
-        <div>
+        <div class="mb-5">
           <slot name="header"></slot>
         </div>
       </header>
