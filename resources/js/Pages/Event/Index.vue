@@ -1,21 +1,33 @@
 <template>
   <app-layout>
     <template #header>
-      <h1 class="font-semibold text-xl text-gray-800 leading-tight">
-        Vue des events
+      <h1 class="font-semibold text-xl text-gray-800 leading-tight text-center">
+        Evenements
       </h1>
     </template>
-    <div class="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3 lg:px-1/12">
+    <div
+      class="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3 lg:px-1/12"
+    >
       <div v-for="event in this.eventList" v-bind:key="event.id">
-        <div class="rounded overflow-hidden shadow h-full bg-white relative hover:shadow-2xl duration-500 ease-in-out">
+        <div
+          class="rounded overflow-hidden shadow h-full bg-white relative hover:shadow-2xl duration-500 ease-in-out"
+        >
           <div class="px-6 py-4 mb-16">
             <p class="text-gray-600 text-xs">
               {{ event.date }}
             </p>
-            <div v-for="type in event.type" v-bind:key="type.id">
-              <p class="text-gray-600 text-xs">
-                {{ type.label }}
-              </p>
+            <div class="inline-flex">
+              <div
+                class="px-0.5"
+                v-for="type in event.types"
+                v-bind:key="type.id"
+              >
+                <span
+                  class="flex-1 select-none bg-red-200 rounded-full text-sm text-white px-1 py-0.5 hover:bg-red-300 duration-200 ease-in-out"
+                >
+                  {{ type.label }}
+                </span>
+              </div>
             </div>
             <div class="font-bold text-xl mb-2">{{ event.title }}</div>
             <p class="text-gray-700 text-base">
