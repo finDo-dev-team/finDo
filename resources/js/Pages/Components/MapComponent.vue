@@ -1,37 +1,48 @@
 <template>
-  <div>
-  <div id="map">
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.1.0/leaflet.css"/>
-    <button @click="show">Map</button>
-  </div>
-  </div>
+    <div id="map">
+    </div>
 </template>
 
 <script>
-
-// import OpenStreetMapProvider from 'leaflet-geosearch'
+import 'leaflet/dist/leaflet.css'
+import { latLng } from "leaflet"
 export default {
 
-   methods:{
 
-        show: function() {
+   mounted() {
+      this.init()
+    },
 
-            var map = L.map('map').setView([47.8316,2.36078477], 13);
-            L.tileLayer('//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
-            var fes = L.marker([48.83463210, 2.36332710]).addTo(map);
-            map.locate(({setView: true, maxZoom: 14}));
-            return map;
+    methods: {
+        init(){
+            alert('Pour afficher la carte vous devez autoriser l\'application à accéder à votre position?');
+            var map = L.map('map', {center: [51.505, -13.02626], zoom: 13}),
+                        onLocationFound = function(e){
+                        var radius = e.accuracy / 2;
+                        //L.marker(e.latlng).addTo(map)
+                        L.circle(e.latlng, radius).addTo(map)
+                        console.log(e.latlng)
+                };
+                function onLocationError(e) {
+                    alert(e.message);
+                };
 
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+
+            map.on('locationfound', onLocationFound);
+            map.on('locationerror', onLocationError);
+            map.locate({setView: true, maxZoom: 16});
         }
-   }
+    }
+
 
 
 }
 </script>
 <style>
             #map {
-            width: 90%;
-            height: 680px;
+            width: 50%;
+            height: 450px;
             margin-right: 10px;
             margin-left: 100px;
             padding-bottom: 1px;
