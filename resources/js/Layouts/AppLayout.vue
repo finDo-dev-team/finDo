@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-row h-full w-full">
     <!-- Sidebar -->
-    <nav class="bg-gray-100 w-20 justify-between flex flex-col shadow-inner">
+    <nav class="w-20 justify-between flex flex-col shadow-inner">
       <div class="mt-10 mb-10">
         <!-- Servira plus tard pour le profil de l'utilisateur
         <a href="#">
@@ -14,7 +14,7 @@
         <div class="mt-10">
           <ul>
             <li class="mb-6">
-              <a href="/map">
+              <inertia-link href="/map">
                 <span>
                   <svg
                     class="fill-current h-10 w-10 text-gray-300 mx-auto hover:text-red-300 transition-color duration-500"
@@ -30,10 +30,10 @@
                     />
                   </svg>
                 </span>
-              </a>
+              </inertia-link>
             </li>
             <li class="mb-6">
-              <a href="/">
+              <inertia-link href="/events">
                 <span>
                   <svg
                     class="fill-current h-10 w-10 text-gray-300 mx-auto hover:text-red-300 transition-color duration-500"
@@ -49,7 +49,7 @@
                     />
                   </svg>
                 </span>
-              </a>
+              </inertia-link>
             </li>
           </ul>
         </div>
@@ -78,11 +78,11 @@
       </div>
       -->
     </nav>
-    <div class="px-8 py-4 text-gray-700 bg-gray-100 w-full h-full">
+    <div class="px-8 py-4 bg-gray-50 text-gray-800 w-full h-full">
       <!-- Content -->
       <!-- Page Heading -->
       <header>
-        <div>
+        <div class="mb-5">
           <slot name="header"></slot>
         </div>
       </header>
@@ -90,18 +90,12 @@
         <slot></slot>
       </main>
     </div>
-
-    <!-- Page Content -->
   </div>
 </template>
 
 <script>
 import JetApplicationLogo from "./../Jetstream/ApplicationLogo";
 import JetApplicationMark from "./../Jetstream/ApplicationMark";
-import JetDropdown from "./../Jetstream/Dropdown";
-import JetDropdownLink from "./../Jetstream/DropdownLink";
-import JetNavLink from "./../Jetstream/NavLink";
-import JetResponsiveNavLink from "./../Jetstream/ResponsiveNavLink";
 
 export default {};
 </script>
