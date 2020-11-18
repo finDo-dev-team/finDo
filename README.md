@@ -34,6 +34,9 @@ Install node dependencies
 Compile assets
 
     npm run dev
+or (for developing)
+
+    npm run watch-poll
     
 Migrate database
 
