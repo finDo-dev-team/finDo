@@ -1,18 +1,19 @@
 <template>
-    <div>
-        <br/><br/>
-            <map-component></map-component>
-        <br/><br/>
-    </div>
+  <app-layout>
+    <template #header>Carte</template>
+    <map-component></map-component>
+  </app-layout>
 </template>
-<script>
-import MapComponent from './Components/MapComponent'
-export default {
 
-    components:{
-        MapComponent
-    }
-}
+<script>
+import AppLayout from "../Layouts/AppLayout.vue";
+import MapComponent from "./Components/MapComponent";
+export default {
+  components: {
+    AppLayout,
+    MapComponent,
+  },
+};
 </script>
 
 

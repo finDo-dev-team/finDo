@@ -17,7 +17,9 @@ class EventController extends Controller
      */
     public function index()
     {
-        $events = Event::with('types')->get();
+        $events = Event::with('types')
+            ->orderBy('date', 'asc')
+            ->get();
         return Inertia::render('Event/Index', compact('events'));
     }
 
