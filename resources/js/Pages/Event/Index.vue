@@ -1,10 +1,6 @@
 <template>
   <app-layout>
-    <template #header>
-      <h1 class="font-semibold text-xl text-gray-800 leading-tight text-center">
-        Evenements
-      </h1>
-    </template>
+    <template #header>Evenements</template>
     <div
       class="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3 lg:px-1/12"
     >

@@ -1,15 +1,20 @@
 <template>
   <app-layout>
-    <template #header>
-      <h1 class="font-semibold text-xl text-gray-800 leading-tight">FinDo</h1>
-    </template>
+    <template #header> Rechercher un événement </template>
     <h2 class="text-2xl">Evénements à venir</h2>
-    <br>
-     <input type="text"  class="form-control"  @keyup="searchEvents" v-model="q" placeholder="Rechercher un évenement"  >
-     <br> <br>
-       <search-component> 
-        <template slot="search"> </template>
-       </search-component>
+    <br />
+    <input
+      type="text"
+      class="form-control"
+      @keyup="searchEvents"
+      v-model="q"
+      placeholder="Rechercher un évenement"
+    />
+    <br />
+    <br />
+    <search-component>
+      <template slot="search"> </template>
+    </search-component>
     <div v-for="event in this.eventList" v-bind:key="event.id">
       <div class="max-w-sm rounded overflow-hidden shadow-lg">
         <div class="px-6 py-4">
@@ -26,9 +31,6 @@
             class="inline-block bg-gray-100 rounded-full px-3 py-1 text-xs font-semibold text-gray-700 mr-2 mb-2"
             >{{ event.location }}</span
           >
-   
-      
-
         </div>
       </div>
     </div>
@@ -38,9 +40,8 @@
 
 
 <script>
-
 import AppLayout from "../Layouts/AppLayout.vue";
-import SearchComponent from './Components/SearchComponent';
+import SearchComponent from "./Components/SearchComponent";
 
 export default {
   components: {
@@ -48,50 +49,38 @@ export default {
     SearchComponent,
   },
 
-
   props: ["events"],
 
   data() {
     return {
       eventList: this.events,
       stockList: this.events,
-      q: '',
+      q: "",
     };
   },
 
-  methods : {
- 
- searchEvents(){
-  
-    if(this.q.length > 1)
-    {
-      axios.get("/search2/" + this.q)
-      .then( response => this.eventList = response.data)
-      .catch(error => console.log(error));
-    }
-    else
-    {
-      axios.get("/search2/" )
-      .then( response => this.eventList = response.data)
-      .catch(error => console.log(error));
-     
-    }
-  
+  methods: {
+    searchEvents() {
+      if (this.q.length > 1) {
+        axios
+          .get("/search2/" + this.q)
+          .then((response) => (this.eventList = response.data))
+          .catch((error) => console.log(error));
+      } else {
+        axios
+          .get("/search2/")
+          .then((response) => (this.eventList = response.data))
+          .catch((error) => console.log(error));
+      }
+    },
+
+    refresh() {
+      this.eventList = this.events;
+    },
   },
-
-
-refresh(){
-    this.eventList= this.events;
-}
-
-     
-  }, 
 
   mounted() {
     console.log(this.eventList);
   },
-
-}
-
-  
+};
 </script>
