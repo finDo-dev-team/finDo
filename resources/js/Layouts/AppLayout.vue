@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-row h-full w-full">
     <!-- Sidebar -->
-    <nav class="w-20 justify-between flex flex-col shadow-inner">
+    <nav class="w-20 justify-between flex flex-col shadow-inner bg-white">
       <div class="mt-10 mb-10">
         <!-- Servira plus tard pour le profil de l'utilisateur
         <a href="#">
@@ -51,28 +51,28 @@
                 </span>
               </inertia-link>
             </li>
-            
-             <li class="mb-6">
+
+            <li class="mb-6">
               <inertia-link href="/search">
                 <span>
-                  <svg class="fill-current h-10 w-10 text-gray-300 mx-auto hover:text-red-300 transition-color duration-500"
+                  <svg
+                    class="fill-current h-10 w-10 text-gray-300 mx-auto hover:text-red-300 transition-color duration-500"
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="-1 0 22 22"
                     fill="black"
                     width="48px"
                     height="48px"
                   >
-                 <path d="M19.129,18.164l-4.518-4.52c1.152-1.373,1.852-3.143,1.852-5.077c0-4.361-3.535-7.896-7.896-7.896
+                    <path
+                      d="M19.129,18.164l-4.518-4.52c1.152-1.373,1.852-3.143,1.852-5.077c0-4.361-3.535-7.896-7.896-7.896
 								c-4.361,0-7.896,3.535-7.896,7.896s3.535,7.896,7.896,7.896c1.934,0,3.705-0.698,5.078-1.853l4.52,4.519
 								c0.266,0.268,0.699,0.268,0.965,0C19.396,18.863,19.396,18.431,19.129,18.164z M8.567,15.028c-3.568,0-6.461-2.893-6.461-6.461
-								s2.893-6.461,6.461-6.461c3.568,0,6.46,2.893,6.46,6.461S12.135,15.028,8.567,15.028z"></path>
-						</svg>
-
+								s2.893-6.461,6.461-6.461c3.568,0,6.46,2.893,6.46,6.461S12.135,15.028,8.567,15.028z"
+                    ></path>
                   </svg>
                 </span>
               </inertia-link>
             </li>
-
           </ul>
         </div>
       </div>
@@ -100,12 +100,18 @@
       </div>
       -->
     </nav>
-    <div class="px-8 py-4 bg-gray-50 text-gray-800 w-full h-full">
+    <div class="px-8 py-4 bg-gray-100 text-gray-800 w-full h-full">
       <!-- Content -->
       <!-- Page Heading -->
       <header>
         <div class="mb-5">
-          <slot name="header"></slot>
+          <h1 class="w-full text-center">
+            <span
+              class="font-semibold text-2xl text-white leading-tight text-center bg-red-300 rounded-full px-2"
+            >
+              <slot name="header"> </slot>
+            </span>
+          </h1>
         </div>
       </header>
       <main>
