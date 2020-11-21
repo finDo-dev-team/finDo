@@ -9,6 +9,11 @@ class Event extends Model
 {
     use HasFactory;
 
+    /**
+     * Définit la relation "Many To Many" entre Event et Type.
+     * 
+     * @return Illuminate\Database\Eloquent\Concerns\HasRelationships::belongsToMany
+     */
     public function types()
     {
         return $this->belongsToMany('App\Models\EventType');
