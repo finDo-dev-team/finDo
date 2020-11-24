@@ -6,13 +6,14 @@ use App\Models\Event;
 use Facade\Ignition\ErrorPage\Renderer;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Redirect;
 
 class EventController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @param int 
+     * @param int
      * @return \Illuminate\Http\Response
      */
     public function index()
@@ -41,7 +42,22 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $request -> validate([
+                'title'=> 'required', 'max:50',
+                'location'=> 'required',
+                'date' => 'required',
+                'description' => 'required',
+        ]);
+
+        Event::create( $request->all());
+        return Redirect::route('index');
+
+    }
+
+    //return Event form
+    public function form(){
+        return Inertia::render('Form');
     }
 
     /**

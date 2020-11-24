@@ -33,6 +33,8 @@ Route::get('/search2/{q?}', [SearchController::class, 'search']);
 
 Route::get('/map',  [HomeController::class, 'showMap']);
 Route::get('/events', [EventController::class, 'index']);
+Route::get('/events-form', [EventController::class, 'form']);
+Route::post('/form-submit', [EventController::class, 'store']);
 
 
 
