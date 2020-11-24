@@ -7,6 +7,10 @@ use Facade\Ignition\ErrorPage\Renderer;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
+/**
+ * Controlleur des événements
+ * 
+ */
 class EventController extends Controller
 {
     /**
