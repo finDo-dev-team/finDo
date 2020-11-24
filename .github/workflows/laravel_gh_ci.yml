@@ -38,5 +38,6 @@ jobs:
       run: vendor/bin/phpunit --coverage-clover coverage.xml && bash <(curl -s https://codecov.io/bash)
     - name: Generate documentation
       run: |
+        sudo apt install graphviz
         php phpDocumentor.phar -d ./app -t ./doc
         php artisan generate:erd eloquent-relation-diagram.png
