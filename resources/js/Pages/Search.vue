@@ -54,7 +54,6 @@ export default {
   data() {
     return {
       eventList: this.events,
-      stockList: this.events,
       q: "",
     };
   },

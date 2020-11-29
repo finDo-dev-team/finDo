@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\DetailledEventController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +31,11 @@ Route::get('/', [HomeController::class, 'index'])->name('index');
 Route::get('/search/{q?}', [SearchController::class, 'index']);
 
 Route::get('/search2/{q?}', [SearchController::class, 'search']);
+
+Route::get('/DetailledEvent/{q?}', [DetailledEventController::class, 'index']);
+
+
+
 
 Route::get('/map',  [HomeController::class, 'showMap']);
 Route::get('/events', [EventController::class, 'index']);
