@@ -16,14 +16,15 @@
           {{ event.detailled_description }}
         </p>
       </div>
-      
+      <div> <img src="C:\Users\Aniss\finDo\public\images\5d0594d8b7279fbbbdc5b4131a3a0bb8.jpg	">  </div>
+
       <div class="px-6 pt-4 pb-2">
         <span
           class="inline-block bg-gray-100 rounded-full px-3 py-1 text-xs font-semibold text-gray-700 mr-2 mb-2"
           >{{ event.location }}</span
         >
       </div>
-     <map-component></map-component>
+     <map-event-component></map-event-component>
     </div>
     
   </app-layout>
@@ -33,12 +34,12 @@
 
 <script>
 import AppLayout from "../Layouts/AppLayout.vue";
-import MapComponent from './Components/MapComponent.vue';
+import MapEventComponent from "./Components/MapEventComponent"
 
 export default {
   components: {
     AppLayout,
-    MapComponent,
+    MapEventComponent,
   },
 
   props: ["events"],
