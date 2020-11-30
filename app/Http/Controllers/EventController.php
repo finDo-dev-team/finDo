@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Event;
-use Facade\Ignition\ErrorPage\Renderer;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
+use App\Models\Event;
+use App\Models\EventType;
+use App\Models\EventEventType;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Facade\Ignition\ErrorPage\Renderer;
 use Illuminate\Support\Facades\Redirect;
 
 class EventController extends Controller
@@ -44,13 +47,34 @@ class EventController extends Controller
     {
 
         $request -> validate([
-                'title'=> 'required', 'max:50',
-                'location'=> 'required',
-                'date' => 'required',
-                'description' => 'required',
+                'title'=> ['required', 'max:50'],
+                'location'=> ['required'],
+                'date' => ['required'],
+                'description' => ['required', 'max:500'],
+                'value' => ['required']
         ]);
 
         Event::create( $request->all());
+
+        $eventArray = ['title' => request('title'), 'location' => request('location'), 'date' => request('date'), 'description' => request('description')];
+        $event = Event::where($eventArray)
+        ->take(1)
+        ->value('id');
+
+        $val= request('value');
+        if($event != null){
+            foreach( $val as $val){
+                $eventTypeId = EventType::where('label',$val)
+                ->take(1)
+                ->value('id');
+                EventEventType::insert([
+                    'event_id' => $event,
+                    'event_type_id' => $eventTypeId
+                ]);
+            }
+        }
+
+
         return Redirect::route('index');
 
     }

@@ -34,6 +34,15 @@
                         <div v-if="$page.errors.description"><span class="text-red-500">{{ $page.errors.description[0] }}</span></div>
                     </div>
                     <div class="mb-4">
+                        <label class="block text-gray-700 text-smfont-bold mb-2">Type(s) d'évènement</label>
+                        <multiselect v-model="form.value" :options="form.options" :multiple="true" :close-on-select="false" :clear-on-select="false" :preserve-search="true" placeholder="Select the event type(s)" :show-labels="false"  :preselect-first="false">
+                        <template slot="selection" slot-scope="{ values, search, isOpen }"><span class="multiselect__single" v-if="values.length &amp;&amp; !isOpen">{{ values.length }} options selected</span></template>
+                        </multiselect>
+                        <div v-if="$page.errors.value"><span class="text-red-500">{{ $page.errors.value[0] }}</span></div>
+                    </div>
+                    <br/>
+
+                    <div class="mb-4">
                         <button class="h-8 px-4 text-sm text-indigo-100 transition-colors duration-150 bg-indigo-700 rounded-lg cursor-pointer focus:shadow-outline hover:bg-indigo-800" type="submit">Envoyer</button>
                     </div>
                 </form>
@@ -46,11 +55,13 @@
 <script>
 
 import AppLayout from "../Layouts/AppLayout.vue";
+import Multiselect from 'vue-multiselect';
 
 export default {
 
     components: {
         AppLayout,
+        Multiselect,
     },
     data() {
         return {
@@ -59,6 +70,20 @@ export default {
                 location: null,
                 date: null,
                 description: null,
+                value: [],
+                options:[
+                    'dolor',
+                    'voluptatibus',
+                    'quam',
+                    'et',
+                    'aut',
+                    'maxime',
+                    'est',
+                    'aliquid',
+                    'dolores',
+                    'molestiae',
+                    'exercitalionem'
+                ],
             },
         }
     },
@@ -73,6 +98,4 @@ export default {
 }
 </script>
 
-<style>
-
-</style>
+<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
