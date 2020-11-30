@@ -11,10 +11,14 @@ use Illuminate\Support\Facades\DB;
 use Facade\Ignition\ErrorPage\Renderer;
 use Illuminate\Support\Facades\Redirect;
 
+/**
+ * Controlleur des événements
+ * 
+ */
 class EventController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Affiche la liste des événements.
      *
      * @param int
      * @return \Illuminate\Http\Response
@@ -24,6 +28,7 @@ class EventController extends Controller
         $events = Event::with('types')
             ->orderBy('date', 'asc')
             ->get();
+
         return Inertia::render('Event/Index', compact('events'));
     }
 

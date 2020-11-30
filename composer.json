@@ -19,6 +19,7 @@
         "laravel/tinker": "^2.0"
     },
     "require-dev": {
+        "beyondcode/laravel-er-diagram-generator": "^1.5",
         "claudiodekker/inertia-laravel-testing": "^1.1",
         "facade/ignition": "^2.3.6",
         "fzaninotto/faker": "^1.9.1",
