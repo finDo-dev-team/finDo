@@ -14,6 +14,13 @@ class Event extends Model
      * 
      * @return Illuminate\Database\Eloquent\Concerns\HasRelationships::belongsToMany
      */
+    protected $fillable = [
+        'title',
+        'location',
+        'date',
+        'description'
+         ];
+
     public function types()
     {
         return $this->belongsToMany('App\Models\EventType');
