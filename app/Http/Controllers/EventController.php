@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Redirect;
 
 /**
  * Controlleur des événements
- * 
+ *
  */
 class EventController extends Controller
 {
@@ -66,10 +66,10 @@ class EventController extends Controller
         ->take(1)
         ->value('id');
 
-        $val= request('value');
+        $values= request('value');
         if($event != null){
-            foreach( $val as $val){
-                $eventTypeId = EventType::where('label',$val)
+            foreach( $value as $values){
+                $eventTypeId = EventType::where('label',$value)
                 ->take(1)
                 ->value('id');
                 EventEventType::insert([
