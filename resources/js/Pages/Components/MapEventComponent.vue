@@ -1,5 +1,4 @@
 <template>
-
   <div id="map"></div>
 </template>
 
@@ -13,24 +12,24 @@ export default {
 
   methods: {
     init() {
-      var map = L.map("map", { center: [51.505, -13.02626], zoom: 13 }),
-        onLocationFound = function (e) {
-          var radius = e.accuracy / 2;
-          //L.marker(e.latlng).addTo(map)
-          L.circle(e.latlng, radius).addTo(map);
-          console.log(e.latlng);
-        };
-      function onLocationError(e) {
-        alert(e.message);
-      }
+      
+//var geo = L.marker(e.latlng);
+
+    
+          var clichy= L.marker([48.89953790309629,2.3150881725992], {icon: myIcon});
+          var test = L.marker([48.7,2.315]);
+
+          var cities = L.layerGroup([clichy,test]);
+
+          var map = L.map("map", { center: [48.899, 2.3150], zoom: 13, layers : [cities] });
+
+
 
       L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png").addTo(
         map
       );
 
-      map.on("locationfound", onLocationFound);
-      map.on("locationerror", onLocationError);
-      map.locate({ setView: true, maxZoom: 16 });
+     // map.locate({ setView: true, maxZoom: 16 });
     },
   },
 };
