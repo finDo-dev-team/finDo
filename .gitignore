@@ -17,3 +17,7 @@ Dockerfile
 nginx/conf.d/app.conf
 Readme Docker.txt
 app.conf
+
+eloquent-relation-diagram.png
+.phpdoc
+doc
