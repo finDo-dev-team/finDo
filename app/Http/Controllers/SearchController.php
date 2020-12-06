@@ -11,7 +11,7 @@ class SearchController extends Controller
 
     /**
      * Affiche un liste d'événements en fonction d'une chaine de caractères.
-     * 
+     *
      * @return Inertia\Inertia\Response
      */
     public function index()
@@ -30,7 +30,7 @@ class SearchController extends Controller
 
     /**
      * Retourne une liste d'événements au format JSON
-     * 
+     *
      * @return Illuminate\Contracts\Routing\ResponseFactory::json
      */
     public function search()
@@ -43,5 +43,13 @@ class SearchController extends Controller
             $events = Event::orderBy('date', 'asc')->get()->take(3);
             return response()->json($events);
         }
+    }
+
+    // Show event into map
+    public function showAllEventsOntoMap()
+    {
+            $address = Event::get('location');
+            return Inertia::render('AllEventsOnToMap',  compact('address'));
+
     }
 }

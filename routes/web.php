@@ -28,6 +28,7 @@ Route::get('/', [HomeController::class, 'index'])->name('index');
 
 
 
+
 Route::get('/search/{q?}', [SearchController::class, 'index']);
 
 Route::get('/search2/{q?}', [SearchController::class, 'search']);
@@ -36,10 +37,14 @@ Route::get('/DetailledEvent/{q?}', [DetailledEventController::class, 'index']);
 
 
 
+Route::get('/map/event', [SearchController::class, 'showAllEventsOntoMap']);
 
 Route::get('/map',  [HomeController::class, 'showMap']);
+
 Route::get('/events', [EventController::class, 'index']);
+
 Route::get('/events-form', [EventController::class, 'form']);
+
 Route::post('/form-submit', [EventController::class, 'store']);
 
 
