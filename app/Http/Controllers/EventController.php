@@ -66,9 +66,9 @@ class EventController extends Controller
         ->take(1)
         ->value('id');
 
-        $values= request('value');
+        $value = request('value');
         if($event != null){
-            foreach( $value as $values){
+            foreach( $value as $value){
                 $eventTypeId = EventType::where('label',$value)
                 ->take(1)
                 ->value('id');
