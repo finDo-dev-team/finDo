@@ -13,25 +13,7 @@
         -->
         <div class="mt-10">
           <ul>
-            <li class="mb-6">
-              <inertia-link href="/events-form">
-                <span>
-                  <svg
-                    class="fill-current h-10 w-10 text-gray-300 mx-auto hover:text-red-300 transition-color duration-500"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="black"
-                    width="48px"
-                    height="48px"
-                  >
-                    <path d="M0 0h24v24H0z" fill="none" />
-                    <path
-                      d="M12 10.9c-.61 0-1.1.49-1.1 1.1s.49 1.1 1.1 1.1c.61 0 1.1-.49 1.1-1.1s-.49-1.1-1.1-1.1zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm2.19 12.19L6 18l3.81-8.19L18 6l-3.81 8.19z"
-                    />
-                  </svg>
-                </span>
-              </inertia-link>
-            </li>
+            
             <li class="mb-6">
               <inertia-link href="/map">
                 <span>
@@ -51,6 +33,7 @@
                 </span>
               </inertia-link>
             </li>
+
             <li class="mb-6">
               <inertia-link href="/events">
                 <span>
@@ -88,6 +71,26 @@
 								c0.266,0.268,0.699,0.268,0.965,0C19.396,18.863,19.396,18.431,19.129,18.164z M8.567,15.028c-3.568,0-6.461-2.893-6.461-6.461
 								s2.893-6.461,6.461-6.461c3.568,0,6.46,2.893,6.46,6.461S12.135,15.028,8.567,15.028z"
                     ></path>
+                  </svg>
+                </span>
+              </inertia-link>
+            </li>
+
+            <li class="mb-6">
+              <inertia-link href="/events-form">
+                <span>
+                  <svg
+                    class="fill-current h-10 w-10 text-gray-300 mx-auto hover:text-red-300 transition-color duration-500"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="black"
+                    width="48px"
+                    height="48px"
+                  >
+                    <path d="M0 0h24v24H0z" fill="none" />
+                    <path
+                      d="M20 1v3h3v2h-3v3h-2V6h-3V4h3V1h2zm-8 12c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm2-9.75V7h3v3h2.92c.05.39.08.79.08 1.2 0 3.32-2.67 7.25-8 11.8-5.33-4.55-8-8.48-8-11.8C4 6.22 7.8 3 12 3c.68 0 1.35.08 2 .25z"
+                    />
                   </svg>
                 </span>
               </inertia-link>
