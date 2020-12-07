@@ -25,6 +25,7 @@
         class="inline-block bg-gray-100 rounded-full px-3 py-1 text-xs font-semibold text-gray-700 mr-2 mb-2"
         >{{ event.location }}</span
       >
+      <a class="rounded-full px-2 hover:bg-gray-100 duration-200 ease-in-out" :href="'/DetailledEvent/' + event.id"> Plus d'info... </a>
     </div>
   </div>
 </template>
