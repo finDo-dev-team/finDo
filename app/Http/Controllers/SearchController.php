@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Event;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
+use Facade\Ignition\ErrorPage\Renderer;
 
 class SearchController extends Controller
 {
@@ -46,10 +47,16 @@ class SearchController extends Controller
     }
 
     // Show event into map
-    public function showAllEventsOntoMap()
+
+    public function showSomeEventsOntoMap(Request $request)
     {
-            $address = Event::get('location');
-            return Inertia::render('AllEventsOnToMap',  compact('address'));
+        $request->validate([
+                'Code_Postal' => ['required','min:5','max:5']
+        ]);
+
+        $address = Event::select('location','title','date')->where('location', 'like', '%'.request('Code_Postal'))->get();
+
+        return Inertia::render('AllEventsOnToMap',  compact('address'));
 
     }
 }
