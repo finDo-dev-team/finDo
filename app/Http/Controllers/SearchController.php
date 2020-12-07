@@ -5,13 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Event;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
+use Facade\Ignition\ErrorPage\Renderer;
 
 class SearchController extends Controller
 {
 
     /**
      * Affiche un liste d'événements en fonction d'une chaine de caractères.
-     * 
+     *
      * @return Inertia\Inertia\Response
      */
     public function index()
@@ -30,7 +31,7 @@ class SearchController extends Controller
 
     /**
      * Retourne une liste d'événements au format JSON
-     * 
+     *
      * @return Illuminate\Contracts\Routing\ResponseFactory::json
      */
     public function search()
@@ -43,5 +44,19 @@ class SearchController extends Controller
             $events = Event::orderBy('date', 'asc')->get()->take(3);
             return response()->json($events);
         }
+    }
+
+    // Show event into map
+
+    public function showSomeEventsOntoMap(Request $request)
+    {
+        $request->validate([
+                'Code_Postal' => ['required','min:5','max:5']
+        ]);
+
+        $address = Event::select('location','title','date')->where('location', 'like', '%'.request('Code_Postal'))->get();
+
+        return Inertia::render('AllEventsOnToMap',  compact('address'));
+
     }
 }
