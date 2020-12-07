@@ -1,7 +1,7 @@
 <template>
   <app-layout>
     <template #header>Evenements</template>
-    <EventList :events="this.eventList"></EventList>
+    <EventList :events="this.eventList" :typesEvents="this.typeEventList"></EventList>
   </app-layout>
 </template>
 
@@ -15,16 +15,20 @@ export default {
     EventList,
   },
 
-  props: ["events"],
+  props: [
+    "events",
+    "typesEvents"
+    ],
 
   data() {
     return {
       eventList: this.events,
+      typeEventList: this.typesEvents,
     };
   },
 
   mounted() {
-    console.log(this.eventList);
+    console.log(this.typeEventList);
   },
 };
 </script>
