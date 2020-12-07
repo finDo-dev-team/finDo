@@ -14,25 +14,6 @@
         <div class="mt-10">
           <ul>
             <li class="mb-6">
-              <inertia-link href="/events-form">
-                <span>
-                  <svg
-                    class="fill-current h-10 w-10 text-gray-300 mx-auto hover:text-red-300 transition-color duration-500"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="black"
-                    width="48px"
-                    height="48px"
-                  >
-                    <path d="M0 0h24v24H0z" fill="none" />
-                    <path
-                      d="M12 10.9c-.61 0-1.1.49-1.1 1.1s.49 1.1 1.1 1.1c.61 0 1.1-.49 1.1-1.1s-.49-1.1-1.1-1.1zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm2.19 12.19L6 18l3.81-8.19L18 6l-3.81 8.19z"
-                    />
-                  </svg>
-                </span>
-              </inertia-link>
-            </li>
-            <li class="mb-6">
               <inertia-link href="/map">
                 <span>
                   <svg
@@ -51,6 +32,7 @@
                 </span>
               </inertia-link>
             </li>
+
             <li class="mb-6">
               <inertia-link href="/events">
                 <span>
@@ -82,12 +64,30 @@
                     width="48px"
                     height="48px"
                   >
+                    <path d="M0 0h24v24H0z" fill="none" />
                     <path
-                      d="M19.129,18.164l-4.518-4.52c1.152-1.373,1.852-3.143,1.852-5.077c0-4.361-3.535-7.896-7.896-7.896
-								c-4.361,0-7.896,3.535-7.896,7.896s3.535,7.896,7.896,7.896c1.934,0,3.705-0.698,5.078-1.853l4.52,4.519
-								c0.266,0.268,0.699,0.268,0.965,0C19.396,18.863,19.396,18.431,19.129,18.164z M8.567,15.028c-3.568,0-6.461-2.893-6.461-6.461
-								s2.893-6.461,6.461-6.461c3.568,0,6.46,2.893,6.46,6.461S12.135,15.028,8.567,15.028z"
-                    ></path>
+                      d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"
+                    />
+                  </svg>
+                </span>
+              </inertia-link>
+            </li>
+
+            <li class="mb-6">
+              <inertia-link href="/events-form">
+                <span>
+                  <svg
+                    class="fill-current h-10 w-10 text-gray-300 mx-auto hover:text-red-300 transition-color duration-500"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="black"
+                    width="48px"
+                    height="48px"
+                  >
+                    <path d="M0 0h24v24H0z" fill="none" />
+                    <path
+                      d="M20 1v3h3v2h-3v3h-2V6h-3V4h3V1h2zm-8 12c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm2-9.75V7h3v3h2.92c.05.39.08.79.08 1.2 0 3.32-2.67 7.25-8 11.8-5.33-4.55-8-8.48-8-11.8C4 6.22 7.8 3 12 3c.68 0 1.35.08 2 .25z"
+                    />
                   </svg>
                 </span>
               </inertia-link>
