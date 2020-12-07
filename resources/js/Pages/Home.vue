@@ -24,7 +24,7 @@
         >
       </div>
       <div class="px-6 pt-4 pb-2">
-        <a :href="'/DetailledEvent/' + event.id "> Plus ... </a>
+        <a class="rounded hover" :href="'/DetailledEvent/' + event.id "> Plus ... </a>
       </div>
     </div>
   </app-layout>
