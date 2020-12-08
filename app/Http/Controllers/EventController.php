@@ -55,41 +55,39 @@ class EventController extends Controller
     public function store(Request $request)
     {
 
-        $request -> validate([
-                'title'=> ['required', 'max:50'],
-                'location'=> ['required'],
-                'date' => ['required'],
-                'description' => ['required', 'max:500'],
-                'value' => ['required']
+        $request->validate([
+            'title' => ['required', 'max:50'],
+            'location' => ['required'],
+            'date' => ['required'],
+            'description' => ['required', 'max:500'],
+            'value' => ['required']
         ]);
 
-        Event::create( $request->all());
+        Event::create($request->all());
 
         $eventArray = ['title' => request('title'), 'location' => request('location'), 'date' => request('date'), 'description' => request('description')];
         $event = Event::where($eventArray)
-        ->take(1)
-        ->value('id');
+            ->take(1)
+            ->value('id');
 
-        $value = request('value');
-        if($event != null){
-            foreach( $value as $value){
-                $eventTypeId = EventType::where('label',$value)
-                ->take(1)
-                ->value('id');
+        $values = request('value');
+        if ($event != null) {
+            foreach ($values as $value) {
+                $eventTypeId = EventType::where('label', $value)
+                    ->take(1)
+                    ->value('id');
                 EventEventType::insert([
                     'event_id' => $event,
                     'event_type_id' => $eventTypeId
                 ]);
             }
         }
-
-
         return Redirect::route('index');
-
     }
 
     //return Event form
-    public function form(){
+    public function form()
+    {
         return Inertia::render('Form');
     }
 
