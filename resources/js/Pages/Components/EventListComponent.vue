@@ -14,7 +14,7 @@
         ↓
       </button>
     </div>
-    <div class="grid grid-cols-12 gap-2">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-2">
       <!-- Colonne filtrage -->
       <div class="col-span-2">
         <h2 class="text-2xl leading-tight">Types:</h2>
