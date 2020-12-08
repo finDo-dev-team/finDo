@@ -26,6 +26,8 @@ class EventFactory extends Factory
             'date' => $this->faker->dateTimeBetween('-1 years', '+1 years'),
             'location' => $this->faker->address(),
             'description' => $this->faker->paragraph(2, true),
+            'detailled_description' => $this->faker->paragraph(20, true),
+            'pictures' => $this->faker->image('public/images'),
         ];
     }
 }
