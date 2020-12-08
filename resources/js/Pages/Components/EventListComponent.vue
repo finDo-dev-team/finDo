@@ -1,24 +1,36 @@
 <template>
   <div>
-    <div class="text-center mb-3">
+    <div class="text-right">
       <button
-        class="flex-1 select-none bg-gray-100 rounded-md text-black px-1 py-0.5 hover:bg-gray-200 duration-200 ease-in-out"
+        class="flex-1 select-none bg-gray-100 rounded-md text-black text-2xl leading-tight px-1 py-0.5 hover:bg-gray-200 duration-200 ease-in-out"
         v-on:click="orderDateAsc"
       >
-        Trier par ordre croissant
+        ↑
       </button>
       <button
-        class="flex-1 select-none bg-gray-100 rounded-md text-black px-1 py-0.5 hover:bg-gray-200 duration-200 ease-in-out"
+        class="flex-1 select-none bg-gray-100 rounded-md text-black text-2xl leading-tight px-1 py-0.5 hover:bg-gray-200 duration-200 ease-in-out"
         v-on:click="orderDateDesc"
       >
-        Trier par ordre décroissant
+        ↓
       </button>
     </div>
     <div class="grid grid-cols-12 gap-2">
       <!-- Colonne filtrage -->
       <div class="col-span-2">
+        <h2 class="text-2xl leading-tight">Types:</h2>
         <div v-for="type in this.typesEvents" v-bind:key="type.id">
-          {{ type.label }}
+          <input
+            type="checkbox"
+            class="appearance-none checked:bg-blue-600 checked:border-transparent"
+          />
+          <label class="inline-flex items-center mt-3">
+            <input
+              type="checkbox"
+              class="form-checkbox h-5 w-5 text-red-300"
+              checked
+              v-on:change="changeTypeToFilter(type.id)"
+            /><span class="ml-2">{{ type.label }}</span>
+          </label>
         </div>
       </div>
       <div
@@ -45,7 +57,7 @@ export default {
   data: function () {
     return {
       eventList: this.events,
-      typesToFilter: [],
+      typesToFilter: this.typesEvents.map((type) => type.id),
     };
   },
 
@@ -73,6 +85,14 @@ export default {
         this.typesToFilter.splice(index, 1);
       }
     },
+    changeTypeToFilter: function (typeId) {
+      if (this.typesToFilter.includes(typeId)) {
+        this.removeTypeToFilter(typeId);
+      } else {
+        this.addTypeToFilter(typeId);
+      }
+      this.filterWithTypesToFilter();
+    },
     passFilter: function (event) {
       return event.types.some((type) =>
         this.typesToFilter.some((typeToFilter) => typeToFilter === type.id)
@@ -85,7 +105,6 @@ export default {
           this.eventList.push(event);
         }
       });
-      console.log(this.eventList);
     },
   },
 };
