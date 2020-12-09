@@ -67,12 +67,13 @@ class EventController extends Controller
 
         $event = Event::create($request->all());
 
+        /* Récupère les id des types d'événement à attacher à l'événement */
         $typesToAdd = array();
-
         foreach ($request->value as $types) {
             array_push($typesToAdd, $types["id"]);
         }
 
+        /* Ajoute le ou les types a l'événement */
         foreach ($typesToAdd as $typeId) {
             $event->types()->attach($typeId);
         }
