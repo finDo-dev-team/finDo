@@ -95,8 +95,10 @@
                 :clear-on-select="false"
                 :preserve-search="true"
                 placeholder="Select the event type(s)"
-                :show-labels="false"
+                :show-labels="true"
                 :preselect-first="false"
+                label="label"
+                track-by="label"
               >
                 <template
                   slot="selection"
@@ -130,14 +132,20 @@
 </template>
 
 <script>
-import AppLayout from "../Layouts/AppLayout.vue";
+import AppLayout from "../../Layouts/AppLayout.vue";
 import Multiselect from "vue-multiselect";
 
 export default {
+
   components: {
     AppLayout,
     Multiselect,
   },
+
+    props: [
+    "eventTypes"
+    ],
+
   data() {
     return {
       form: {
@@ -146,25 +154,20 @@ export default {
         date: null,
         description: null,
         value: [],
-        options: [
-          "dolor",
-          "voluptatibus",
-          "quam",
-          "et",
-          "aut",
-          "maxime",
-          "est",
-          "aliquid",
-          "dolores",
-          "molestiae",
-          "exercitalionem",
-        ],
+        options: this.eventTypes.map(type => {
+          let rObj = {};
+          rObj["id"] = type.id;
+          rObj["label"] = type.label;
+          return rObj;
+        }
+        ),
       },
     };
   },
+
   methods: {
     submit() {
-      this.$inertia.post("/form-submit", this.form);
+      this.$inertia.post("/event/store", this.form);
     },
   },
 };
