@@ -43,7 +43,10 @@ class EventController extends Controller
      */
     public function create()
     {
-        //
+        $eventTypes = EventType::all();
+        return Inertia::render('Event/Create', [
+            'eventTypes' => $eventTypes
+        ]);
     }
 
     /**
@@ -54,7 +57,6 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-
         $request->validate([
             'title' => ['required', 'max:50'],
             'location' => ['required'],
@@ -63,32 +65,19 @@ class EventController extends Controller
             'value' => ['required']
         ]);
 
-        Event::create($request->all());
+        $event = Event::create($request->all());
 
-        $eventArray = ['title' => request('title'), 'location' => request('location'), 'date' => request('date'), 'description' => request('description')];
-        $event = Event::where($eventArray)
-            ->take(1)
-            ->value('id');
+        $typesToAdd = array();
 
-        $values = request('value');
-        if ($event != null) {
-            foreach ($values as $value) {
-                $eventTypeId = EventType::where('label', $value)
-                    ->take(1)
-                    ->value('id');
-                EventEventType::insert([
-                    'event_id' => $event,
-                    'event_type_id' => $eventTypeId
-                ]);
-            }
+        foreach ($request->value as $types) {
+            array_push($typesToAdd, $types["id"]);
         }
-        return Redirect::route('index');
-    }
 
-    //return Event form
-    public function form()
-    {
-        return Inertia::render('Form');
+        foreach ($typesToAdd as $typeId) {
+            $event->types()->attach($typeId);
+        }
+
+        return Redirect::route('events');
     }
 
     /**
