@@ -19,5 +19,6 @@ Readme Docker.txt
 app.conf
 
 eloquent-relation-diagram.png
-.phpdoc
-doc
+/.phpdoc
+/doc
+doc.zip

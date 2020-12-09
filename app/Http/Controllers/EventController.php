@@ -43,7 +43,10 @@ class EventController extends Controller
      */
     public function create()
     {
-        //
+        $eventTypes = EventType::all();
+        return Inertia::render('Event/Create', [
+            'eventTypes' => $eventTypes
+        ]);
     }
 
     /**
@@ -54,43 +57,27 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-
-        $request -> validate([
-                'title'=> ['required', 'max:50'],
-                'location'=> ['required'],
-                'date' => ['required'],
-                'description' => ['required', 'max:500'],
-                'value' => ['required']
+        $request->validate([
+            'title' => ['required', 'max:50'],
+            'location' => ['required'],
+            'date' => ['required'],
+            'description' => ['required', 'max:500'],
+            'value' => ['required']
         ]);
 
-        Event::create( $request->all());
+        $event = Event::create($request->all());
 
-        $eventArray = ['title' => request('title'), 'location' => request('location'), 'date' => request('date'), 'description' => request('description')];
-        $event = Event::where($eventArray)
-        ->take(1)
-        ->value('id');
+        $typesToAdd = array();
 
-        $value = request('value');
-        if($event != null){
-            foreach( $value as $value){
-                $eventTypeId = EventType::where('label',$value)
-                ->take(1)
-                ->value('id');
-                EventEventType::insert([
-                    'event_id' => $event,
-                    'event_type_id' => $eventTypeId
-                ]);
-            }
+        foreach ($request->value as $types) {
+            array_push($typesToAdd, $types["id"]);
         }
 
+        foreach ($typesToAdd as $typeId) {
+            $event->types()->attach($typeId);
+        }
 
-        return Redirect::route('index');
-
-    }
-
-    //return Event form
-    public function form(){
-        return Inertia::render('Form');
+        return Redirect::route('events');
     }
 
     /**

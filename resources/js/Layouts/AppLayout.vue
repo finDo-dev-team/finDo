@@ -74,7 +74,7 @@
             </li>
 
             <li class="mb-6">
-              <inertia-link href="/events-form">
+              <inertia-link href="/event/create">
                 <span>
                   <svg
                     class="fill-current h-10 w-10 text-gray-300 mx-auto hover:text-red-300 transition-color duration-500"
