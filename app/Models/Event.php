@@ -20,9 +20,4 @@ class Event extends Model
         'date',
         'description'
          ];
-
-    public function types()
-    {
-        return $this->belongsToMany('App\Models\EventType');
-    }
 }

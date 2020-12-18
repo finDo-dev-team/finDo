@@ -29,38 +29,17 @@ class SearchController extends Controller
         }
     }
 
-    /**
-     * Retourne une liste d'événements au format JSON
-     *
-     * @return Illuminate\Contracts\Routing\ResponseFactory::json
-     */
-    public function search()
-    {
-        if (request('q') != null) {
-            $events = Event::where('title', 'like', request('q') . '%')->get();
-            return response()->json($events);
-            //return Inertia::render('/', ['events' => $events]);
-        } else {
-            $events = Event::orderBy('date', 'asc')->get()->take(3);
-            return response()->json($events);
+
+     public function search(){
+        
+        if( request('q') != null)
+        {
+        $events = Event::where('title', 'like', request('q') . '%')->get();
+        return response()->json($events);
+        //return Inertia::render('/', ['events' => $events]);
         }
     }
 
-    // Show event into map
+    
 
-    public function showSomeEventsOntoMap(Request $request)
-    {
-        $request->validate([
-                'Code_Postal' => ['required','min:5','max:5']
-        ], [
-            'Code_Postal.required' => 'Veullez renseigner un code postal valide composé de 5 chiffres',
-            'Code_Postal.min' => 'Veullez renseigner un code postal valide composé de 5 chiffres',
-            'Code_Postal.max' => 'Veullez renseigner un code postal valide composé de 5 chiffres',
-        ]);
-
-        $address = Event::select('location','title','date')->where('location', 'like', '%'.request('Code_Postal'))->get();
-
-        return Inertia::render('AllEventsOnToMap',  compact('address'));
-
-    }
 }
