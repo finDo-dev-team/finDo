@@ -52,6 +52,10 @@ class SearchController extends Controller
     {
         $request->validate([
                 'Code_Postal' => ['required','min:5','max:5']
+        ], [
+            'Code_Postal.required' => 'Veullez renseigner un code postal valide composé de 5 chiffres',
+            'Code_Postal.min' => 'Veullez renseigner un code postal valide composé de 5 chiffres',
+            'Code_Postal.max' => 'Veullez renseigner un code postal valide composé de 5 chiffres',
         ]);
 
         $address = Event::select('location','title','date')->where('location', 'like', '%'.request('Code_Postal'))->get();
