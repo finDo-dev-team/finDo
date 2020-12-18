@@ -29,11 +29,12 @@ body {
         />
         &emsp;
         <input
-          type="text"
+          type="number"
           aria-label="postalCode"
           id="postalCode"
           v-model="form.Code_Postal"
-          placeholder="Code postal : 75012"
+          placeholder="Code postal : 75001"
+
         />
         <div v-if="$page.errors.Code_Postal">
           <span class="text-red-500"
