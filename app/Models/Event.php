@@ -19,5 +19,10 @@ class Event extends Model
         'location',
         'date',
         'description'
-         ];
+    ];
+
+    public function types()
+    {
+        return $this->belongsToMany('App\Models\EventType');
+    }
 }

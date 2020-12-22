@@ -28,7 +28,13 @@ class EventController extends Controller
         $events = Event::with('types')
             ->orderBy('date', 'asc')
             ->get();
-        return Inertia::render('Event/Index', compact('events'));
+            
+        $typesEvents = EventType::orderBy('label', 'asc')->get();
+
+        return Inertia::render('Event/Index', [
+            'events' => $events,
+            'typesEvents' => $typesEvents
+        ]);
     }
 
     /**
