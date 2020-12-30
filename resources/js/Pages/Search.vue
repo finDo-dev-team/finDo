@@ -1,8 +1,9 @@
 <template>
   <app-layout>
     <template #header> Rechercher un événement </template>
-    <h2 class="text-2xl">Evénements à venir</h2>
+    
     <br />
+    <!--
     <input
       type="text"
       class="form-control"
@@ -11,10 +12,13 @@
       placeholder="Rechercher un évenement"
     />
     <br />
+    -->
     <br />
     <search-component>
       <template slot="search"> </template>
     </search-component>
+    <br />
+    <!--
     <div v-for="event in this.eventList" v-bind:key="event.id">
       <div class="max-w-sm rounded overflow-hidden shadow-lg">
         <div class="px-6 py-4">
@@ -34,6 +38,16 @@
         </div>
       </div>
     </div>
+    -->
+    <div
+        class="col-span-10 grid grid-cols-1 gap-2 lg:grid-cols-2 2xl:grid-cols-3"
+      >
+        <EventListItem
+          v-for="event in this.eventList"
+          v-bind:key="event.id"
+          :event="event"
+        ></EventListItem>
+      </div>
   </app-layout>
 </template>
 
@@ -42,11 +56,13 @@
 <script>
 import AppLayout from "../Layouts/AppLayout.vue";
 import SearchComponent from "./Components/SearchComponent";
+import EventListItem from "./Components/EventListItemComponent";
 
 export default {
   components: {
     AppLayout,
     SearchComponent,
+    EventListItem,
   },
 
   props: ["events"],
