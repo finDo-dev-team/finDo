@@ -23,8 +23,7 @@ class SearchController extends Controller
         } else {
             $events = Event::orderBy('date', 'asc')
                 ->whereDate('date', '>=', date('Y-m-d'))
-                ->get()
-                ->take(3);
+                ->get();
             return Inertia::render('Search', compact('events'));
         }
     }
