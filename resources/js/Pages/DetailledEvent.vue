@@ -17,7 +17,7 @@
         </p>
       </div>
       <div> <img src="C:\Users\Aniss\finDo\public\images\5d0594d8b7279fbbbdc5b4131a3a0bb8.jpg	">  </div>
-
+      -> images à venir
       <div class="px-6 pt-4 pb-2">
         <span
           class="inline-block bg-gray-100 rounded-full px-3 py-1 text-xs font-semibold text-gray-700 mr-2 mb-2"
@@ -25,6 +25,7 @@
         >
       </div>
      <map-event-component></map-event-component>
+     -> position geo à venir
     </div>
     
   </app-layout>

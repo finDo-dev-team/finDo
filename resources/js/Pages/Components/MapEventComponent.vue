@@ -13,15 +13,9 @@ export default {
   methods: {
     init() {
       
-//var geo = L.marker(e.latlng);
+      
 
-    
-          var clichy= L.marker([48.89953790309629,2.3150881725992], {icon: myIcon});
-          var test = L.marker([48.7,2.315]);
-
-          var cities = L.layerGroup([clichy,test]);
-
-          var map = L.map("map", { center: [48.899, 2.3150], zoom: 13, layers : [cities] });
+          var map = L.map("map", { center: [48.899, 2.3150], zoom: 13 });
 
 
 
