@@ -23,7 +23,7 @@ body {
     <div class="mb-4">
       <form @submit.prevent="submit">
         <input
-          class="h-8 px-4 text-sm text-indigo-100 transition-colors duration-150 bg-indigo-700 rounded-lg cursor-pointer hover:bg-indigo-800"
+          class="h-8 px-4 text-white duration-300 rounded-lg focus:shadow-outline bg-red-300 hover:bg-red-400 transition"
           type="submit"
           value="Search"
         />
