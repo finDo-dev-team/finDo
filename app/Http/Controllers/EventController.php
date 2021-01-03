@@ -28,6 +28,7 @@ class EventController extends Controller
         $events = Event::with('types')
             ->orderBy('date', 'asc')
             ->get();
+            
         $typesEvents = EventType::orderBy('label', 'asc')->get();
 
         return Inertia::render('Event/Index', [
@@ -63,16 +64,26 @@ class EventController extends Controller
             'date' => ['required'],
             'description' => ['required', 'max:500'],
             'value' => ['required']
+        ], [
+            'title.required' => 'Le titre est obligatoire.',
+            'title.max' => 'Le titre ne doit pas dépasser :max caractères.',
+            'location.required'=> 'La localisation est obligatoire.',
+            'date.required'=> 'La date est obligatoire.',
+            'description.required'=> 'La description est obligatoire.',
+            'description.max' => 'La description ne doit pas dépasser :max caractères.',
+            'value.required'=> 'Veuillez choisir au moins une valeur dans la liste.',
         ]);
+
 
         $event = Event::create($request->all());
 
+        /* Récupère les id des types d'événement à attacher à l'événement */
         $typesToAdd = array();
-
         foreach ($request->value as $types) {
             array_push($typesToAdd, $types["id"]);
         }
 
+        /* Ajoute le ou les types a l'événement */
         foreach ($typesToAdd as $typeId) {
             $event->types()->attach($typeId);
         }

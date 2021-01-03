@@ -23,40 +23,38 @@ class SearchController extends Controller
         } else {
             $events = Event::orderBy('date', 'asc')
                 ->whereDate('date', '>=', date('Y-m-d'))
-                ->get()
-                ->take(3);
+                ->get();
             return Inertia::render('Search', compact('events'));
         }
     }
 
-    /**
-     * Retourne une liste d'événements au format JSON
-     *
-     * @return Illuminate\Contracts\Routing\ResponseFactory::json
-     */
-    public function search()
-    {
-        if (request('q') != null) {
-            $events = Event::where('title', 'like', request('q') . '%')->get();
-            return response()->json($events);
-            //return Inertia::render('/', ['events' => $events]);
-        } else {
-            $events = Event::orderBy('date', 'asc')->get()->take(3);
-            return response()->json($events);
+
+     public function search(){
+
+        if( request('q') != null)
+        {
+        $events = Event::where('title', 'like', request('q') . '%')->get();
+        return response()->json($events);
+        //return Inertia::render('/', ['events' => $events]);
         }
     }
 
-    // Show event into map
+        // Show event into map
 
-    public function showSomeEventsOntoMap(Request $request)
-    {
-        $request->validate([
-                'Code_Postal' => ['required','min:5','max:5']
-        ]);
+        public function showSomeEventsOntoMap(Request $request)
+        {
+            $request->validate([
+                    'Code_Postal' => ['required','min:5','max:5']
+            ],[
+                'Code_Postal.required' => 'Veuillez renseigner le champ avec un code postal valide',
+                'Code_Postal.min' => 'Veuillez renseigner le champ avec un code postal valide',
+                'Code_Postal.max' => 'Veuillez renseigner le champ avec un code postal valide'
+            ]);
 
-        $address = Event::select('location','title','date')->where('location', 'like', '%'.request('Code_Postal'))->get();
+            $address = Event::select('location','title','date')->where('location', 'like', '%'.request('Code_Postal'))->get();
 
-        return Inertia::render('AllEventsOnToMap',  compact('address'));
+            return Inertia::render('AllEventsOnToMap',  compact('address'));
 
-    }
+        }
+
 }
