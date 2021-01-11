@@ -19,12 +19,22 @@
             <l-map
               v-if="showMap"
               :zoom="zoom"
+              :minZoom="minZoom"
+              :maxZoom="maxZoom"
               :center="center"
               :options="mapOptions"
+              :inertia="true"
               @update:center="centerUpdate"
               @update:zoom="zoomUpdate"
             >
-              <l-tile-layer :url="url" :attribution="attribution" />
+              <l-tile-layer
+                :options="layerOptions"
+                :tile-layer-class="tileLayerClass"
+              />
+              <l-control-attribution
+                position="bottomleft"
+                :prefix="attribution"
+              ></l-control-attribution>
               <l-marker :lat-lng="withPopup">
                 <l-popup>
                   <div @click="innerClick">
@@ -87,11 +97,21 @@
 <script>
 import EventListItem from "./EventListItemComponent";
 import { latLng } from "leaflet";
-import { LMap, LTileLayer, LMarker, LPopup, LTooltip } from "vue2-leaflet";
+import {
+  LMap,
+  LTileLayer,
+  LMarker,
+  LPopup,
+  LTooltip,
+  LControlAttribution,
+} from "vue2-leaflet";
+import mapboxgl from "mapbox-gl";
+import "mapbox-gl-leaflet";
+import "mapbox-gl/dist/mapbox-gl.css";
 import "leaflet/dist/leaflet.css";
 
 export default {
-  name: "EventList",
+  name: "EventMapList",
 
   props: ["events", "typesEvents"],
 
@@ -101,6 +121,10 @@ export default {
       typesToFilter: this.typesEvents.map((type) => type.id),
       // Map
       zoom: 12.5,
+      maxZoom: 18,
+      minZoom: 13,
+      attribution:
+        'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
       center: latLng(48.859043, 2.342759),
       url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
       withPopup: latLng(47.41322, -1.219482),
@@ -109,9 +133,16 @@ export default {
       currentCenter: latLng(47.41322, -1.219482),
       showParagraph: false,
       mapOptions: {
-        zoomSnap: 0.5,
+        zoomDelta: 0.25,
+        zoomSnap: 0,
       },
       showMap: true,
+      tileLayerClass: (url, options) => L.mapboxGL(options),
+      layerOptions: {
+        accessToken:
+          "pk.eyJ1IjoiamVzdGluLWciLCJhIjoiY2tqc3Z3bGM4NDRpcjJybzc1NXV1OGl6aiJ9.mlV-NsR4tljhmc20tbqstQ",
+        style: "mapbox://styles/jestin-g/ckjswlvw30zyf19pgao32tb4h",
+      },
     };
   },
 
@@ -122,6 +153,7 @@ export default {
     LMarker,
     LPopup,
     LTooltip,
+    LControlAttribution,
   },
 
   methods: {
