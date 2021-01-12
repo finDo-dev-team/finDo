@@ -1,20 +1,9 @@
 <template>
   <div>
-    <div class="grid grid-cols-1 lg:grid-cols-12">
+    <div class="grid grid-cols-1 lg:grid-cols-12 h-28">
       <!-- Colonne carte -->
       <div class="col-span-8">
         <div style="height: 700px; width: 100%">
-          <div style="height: 200px overflow: auto;">
-            <p>
-              First marker is placed at {{ withPopup.lat }}, {{ withPopup.lng }}
-            </p>
-            <p>
-              Center is at {{ currentCenter }} and the zoom is:
-              {{ currentZoom }}
-            </p>
-            <button @click="showLongText">Toggle long popup</button>
-            <button @click="showMap = !showMap">Toggle map</button>
-          </div>
           <div class="h-1/2 md:h-full">
             <l-map
               v-if="showMap"
@@ -65,7 +54,7 @@
           </div>
         </div>
       </div>
-      <!-- Colonne filtrage -->
+      <!-- Colonne filtrage 
       <div class="col-span-1">
         <h2 class="text-2xl leading-tight">Types:</h2>
         <div v-for="type in this.typesEvents" v-bind:key="type.id">
@@ -83,7 +72,8 @@
           </label>
         </div>
       </div>
-      <div class="col-span-3 grid grid-cols-1 gap-2 2xl:grid-cols-2">
+      -->
+      <div class="overflow-y-auto max-h-screen col-span-4 no-scrollbar">
         <EventListItem
           v-for="event in this.eventList"
           v-bind:key="event.id"
@@ -210,3 +200,15 @@ export default {
   },
 };
 </script>
+
+<style>
+/* Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+</style>
