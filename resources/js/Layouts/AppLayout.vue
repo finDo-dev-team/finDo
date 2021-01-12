@@ -119,7 +119,7 @@
       </div>
       -->
     </nav>
-    <div class="px-8 py-4 bg-gray-100 text-gray-800 w-full h-full">
+    <div class="py-2 md:px-8 md:py-4 bg-gray-100 text-gray-800 w-full h-full">
       <!-- Content -->
       <!-- Page Heading -->
       <header>
