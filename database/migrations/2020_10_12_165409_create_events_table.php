@@ -20,8 +20,9 @@ class CreateEventsTable extends Migration
             $table->text('location');
             $table->text('description');
             $table->text('detailled_description');
+            $table->decimal('longitude', 10, 7);
+            $table->decimal('latitude', 10, 7);
             $table->timestamps();
-            $table->text('pictures');
         });
     }
 
