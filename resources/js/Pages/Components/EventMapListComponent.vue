@@ -55,36 +55,36 @@
         </l-map>
       </div>
     </div>
-     
-      <div class="col-span-1">
-        <h2 class="text-2xl leading-tight">Types:</h2>
-        <div v-for="type in this.typesEvents" v-bind:key="type.id">
-          <input
-            type="checkbox"
-            class="appearance-none checked:bg-blue-600 checked:border-transparent"
-          />
-          <label class="inline-flex items-center mt-3">
-            <input
-              type="checkbox"
-              class="form-checkbox h-5 w-5 text-red-300"
-              checked
-              v-on:change="changeTypeToFilter(type.id)"
-            /><span class="ml-2">{{ type.label }}</span>
-          </label>
-        </div>
-      </div>
-      <div class="col-span-1">
-        <input id="date" type="date" v-model="todayDate">
-         <input id="date1" type="date" v-model="twoWeeksDate">
-      </div>
     <div
       class="md:overflow-y-auto max-h-screen md:col-span-5 lg:col-span-4 no-scrollbar"
     >
+      <!-- Colonne liste -->
       <EventListItem
         v-for="event in this.eventList"
         v-bind:key="event.id"
         :event="event"
       ></EventListItem>
+    </div>
+    <div class="col-span-1">
+      <h2 class="text-2xl leading-tight">Types:</h2>
+      <div v-for="type in this.typesEvents" v-bind:key="type.id">
+        <input
+          type="checkbox"
+          class="appearance-none checked:bg-blue-600 checked:border-transparent"
+        />
+        <label class="inline-flex items-center mt-3">
+          <input
+            type="checkbox"
+            class="form-checkbox h-5 w-5 text-red-300"
+            checked
+            v-on:change="changeTypeToFilter(type.id)"
+          /><span class="ml-2">{{ type.label }}</span>
+        </label>
+      </div>
+    </div>
+    <div class="col-span-1">
+      <input id="todayDate" type="date" v-model="todayDate" />
+      <input id="twoWeeksDate" type="date" v-model="twoWeeksDate" />
     </div>
   </div>
 </template>
@@ -138,8 +138,8 @@ export default {
           "pk.eyJ1IjoiamVzdGluLWciLCJhIjoiY2tqc3Z3bGM4NDRpcjJybzc1NXV1OGl6aiJ9.mlV-NsR4tljhmc20tbqstQ",
         style: "mapbox://styles/jestin-g/ckjswlvw30zyf19pgao32tb4h",
       },
-      todayDate : new Date().toISOString().substr(0, 10),
-      twoWeeksDate : new Date(Date.now() + 12096e5).toISOString().substr(0, 10),
+      todayDate: new Date().toISOString().substr(0, 10),
+      twoWeeksDate: new Date(Date.now() + 12096e5).toISOString().substr(0, 10),
     };
   },
 
@@ -154,6 +154,15 @@ export default {
   },
 
   methods: {
+    changeTypeToFilter: function (typeId) {
+      if (this.typesToFilter.includes(typeId)) {
+        this.removeTypeToFilter(typeId);
+      } else {
+        this.addTypeToFilter(typeId);
+      }
+      this.filterWithTypesToFilter();
+    },
+
     addTypeToFilter: function (typeId) {
       this.typesToFilter.push(typeId);
     },
@@ -165,21 +174,6 @@ export default {
       }
     },
 
-    changeTypeToFilter: function (typeId) {
-      if (this.typesToFilter.includes(typeId)) {
-        this.removeTypeToFilter(typeId);
-      } else {
-        this.addTypeToFilter(typeId);
-      }
-      this.filterWithTypesToFilter();
-    },
-
-    passFilter: function (event) {
-      return event.types.some((type) =>
-        this.typesToFilter.some((typeToFilter) => typeToFilter === type.id)
-      );
-    },
-
     filterWithTypesToFilter: function () {
       this.eventList = [];
       this.events.forEach((event) => {
@@ -189,26 +183,12 @@ export default {
       });
     },
 
-    zoomUpdate(zoom) {
-      this.currentZoom = zoom;
+    passFilter: function (event) {
+      if (event.types.length == 0) return true;
+      return event.types.some((type) =>
+        this.typesToFilter.some((typeToFilter) => typeToFilter === type.id)
+      );
     },
-
-    centerUpdate(center) {
-      this.currentCenter = center;
-    },
-
-    showLongText() {
-      this.showParagraph = !this.showParagraph;
-    },
-
-    innerClick() {
-      alert("Click!");
-    },
-  },
-
-  mounted() {
-    // console.log(this.eventList);
-    //console.log(this.todayDate);
   },
 };
 </script>
