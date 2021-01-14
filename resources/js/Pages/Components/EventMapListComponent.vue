@@ -55,7 +55,7 @@
         </l-map>
       </div>
     </div>
-    <!-- Colonne filtrage 
+     
       <div class="col-span-1">
         <h2 class="text-2xl leading-tight">Types:</h2>
         <div v-for="type in this.typesEvents" v-bind:key="type.id">
@@ -73,7 +73,10 @@
           </label>
         </div>
       </div>
-      -->
+      <div class="col-span-1">
+        <input id="date" type="date" v-model="todayDate">
+         <input id="date1" type="date" v-model="twoWeeksDate">
+      </div>
     <div
       class="md:overflow-y-auto max-h-screen md:col-span-5 lg:col-span-4 no-scrollbar"
     >
@@ -135,6 +138,8 @@ export default {
           "pk.eyJ1IjoiamVzdGluLWciLCJhIjoiY2tqc3Z3bGM4NDRpcjJybzc1NXV1OGl6aiJ9.mlV-NsR4tljhmc20tbqstQ",
         style: "mapbox://styles/jestin-g/ckjswlvw30zyf19pgao32tb4h",
       },
+      todayDate : new Date().toISOString().substr(0, 10),
+      twoWeeksDate : new Date(Date.now() + 12096e5).toISOString().substr(0, 10),
     };
   },
 
@@ -203,6 +208,7 @@ export default {
 
   mounted() {
     // console.log(this.eventList);
+    //console.log(this.todayDate);
   },
 };
 </script>
