@@ -28,7 +28,7 @@ export default {
   },
 
   mounted() {
-    console.log(this.typeEventList);
+    // display data
   },
 };
 </script>

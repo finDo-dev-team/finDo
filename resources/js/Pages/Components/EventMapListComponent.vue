@@ -22,6 +22,12 @@
             position="bottomleft"
             :prefix="attribution"
           ></l-control-attribution>
+          <l-marker
+            v-for="event in this.eventList"
+            v-bind:key="event.id"
+            :lat-lng="event.latLng"
+          >
+          </l-marker>
           <l-marker :lat-lng="withPopup">
             <l-popup>
               <div @click="innerClick">
@@ -193,6 +199,10 @@ export default {
     innerClick() {
       alert("Click!");
     },
+  },
+
+  mounted() {
+    // console.log(this.eventList);
   },
 };
 </script>

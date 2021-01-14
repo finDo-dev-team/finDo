@@ -16,6 +16,11 @@ class Event extends Model
         'description'
     ];
 
+    protected $casts = [
+        'latitude' => 'double',
+        'longitude' => 'double',
+    ];
+
     /**
      * Définit la relation "Many To Many" entre Event et Type.
      * 
@@ -24,5 +29,12 @@ class Event extends Model
     public function types()
     {
         return $this->belongsToMany('App\Models\EventType');
+    }
+
+    public function getLatLng()
+    {
+        $rtr = array();
+        \array_push($rtr, $this->latitude, $this->longitude);
+        return $rtr;
     }
 }

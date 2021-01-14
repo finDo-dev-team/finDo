@@ -28,6 +28,10 @@ class EventController extends Controller
         $events = Event::with('types')
             ->orderBy('date', 'asc')
             ->get();
+        
+        foreach ($events as $event) {
+            $event->latLng = $event->getLatLng();
+        }
             
         $typesEvents = EventType::orderBy('label', 'asc')->get();
 
