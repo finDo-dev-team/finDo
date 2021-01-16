@@ -31,10 +31,10 @@ class Event extends Model
         return $this->belongsToMany('App\Models\EventType');
     }
 
-    public function getLatLng()
+    public function addLatLngField()
     {
-        $rtr = array();
-        \array_push($rtr, $this->latitude, $this->longitude);
-        return $rtr;
+        $latLng = array();
+        \array_push($latLng, $this->latitude, $this->longitude);
+        $this->latLng = $latLng;
     }
 }
