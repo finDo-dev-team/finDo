@@ -1,90 +1,92 @@
 <template>
-  <div class="grid grid-cols-1 gap-0 md:grid-cols-12 h-screen2/3">
-    <!-- Colonne carte -->
-    <div class="md:col-span-7 lg:col-span-8">
-      <div class="h-screen2/3 md:h-full w-full">
-        <l-map
-          v-if="showMap"
-          :zoom="zoom"
-          :minZoom="minZoom"
-          :maxZoom="maxZoom"
-          :center="center"
-          :options="mapOptions"
-          :inertia="true"
-          @update:center="centerUpdate"
-          @update:zoom="zoomUpdate"
-        >
-          <l-tile-layer
-            :options="layerOptions"
-            :tile-layer-class="tileLayerClass"
-          />
-          <l-control-attribution
-            position="bottomleft"
-            :prefix="attribution"
-          ></l-control-attribution>
-          <l-marker
-            v-for="event in this.eventList"
-            v-bind:key="event.id"
-            :lat-lng="event.latLng"
+  <div>
+    <!-- Ligne Map + List -->
+    <div class="grid grid-cols-1 gap-0 md:grid-cols-12 h-screen2/3">
+      <!-- Colonne carte -->
+      <div class="md:col-span-7 lg:col-span-8">
+        <div class="h-screen2/3 md:h-full w-full">
+          <l-map
+            v-if="showMap"
+            :zoom="zoom"
+            :minZoom="minZoom"
+            :maxZoom="maxZoom"
+            :center="center"
+            :options="mapOptions"
+            :inertia="true"
           >
-          </l-marker>
-          <l-marker :lat-lng="withPopup">
-            <l-popup>
-              <div @click="innerClick">
-                I am a popup
+            <l-tile-layer
+              :options="layerOptions"
+              :tile-layer-class="tileLayerClass"
+            />
+            <l-control-attribution
+              position="bottomleft"
+              :prefix="attribution"
+            ></l-control-attribution>
+            <l-marker
+              v-for="event in this.eventList"
+              v-bind:key="event.id"
+              :lat-lng="event.latLng"
+            >
+            </l-marker>
+            <l-marker :lat-lng="withPopup">
+              <l-popup>
                 <p v-show="showParagraph">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                   Quisque sed pretium nisl, ut sagittis sapien. Sed vel
                   sollicitudin nisi. Donec finibus semper metus id malesuada.
                 </p>
-              </div>
-            </l-popup>
-          </l-marker>
-          <l-marker :lat-lng="withTooltip">
-            <l-tooltip :options="{ permanent: true, interactive: true }">
-              <div @click="innerClick">
+              </l-popup>
+            </l-marker>
+            <l-marker :lat-lng="withTooltip">
+              <l-tooltip :options="{ permanent: true, interactive: true }">
                 I am a tooltip
                 <p v-show="showParagraph">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                   Quisque sed pretium nisl, ut sagittis sapien. Sed vel
                   sollicitudin nisi. Donec finibus semper metus id malesuada.
                 </p>
-              </div>
-            </l-tooltip>
-          </l-marker>
-        </l-map>
+              </l-tooltip>
+            </l-marker>
+          </l-map>
+        </div>
+      </div>
+      <div
+        class="md:overflow-y-auto max-h-screen md:col-span-5 lg:col-span-4 no-scrollbar"
+      >
+        <!-- Colonne liste -->
+        <EventListItem
+          v-for="event in this.eventList"
+          v-bind:key="event.id"
+          :event="event"
+        ></EventListItem>
       </div>
     </div>
-    <div
-      class="md:overflow-y-auto max-h-screen md:col-span-5 lg:col-span-4 no-scrollbar"
-    >
-      <!-- Colonne liste -->
-      <EventListItem
-        v-for="event in this.eventList"
-        v-bind:key="event.id"
-        :event="event"
-      ></EventListItem>
-    </div>
-    <div class="col-span-1">
-      <h2 class="text-2xl leading-tight">Types:</h2>
-      <div v-for="type in this.typesEvents" v-bind:key="type.id">
-        <input
-          type="checkbox"
-          class="appearance-none checked:bg-blue-600 checked:border-transparent"
-        />
+    <!-- Ligne Filtrage -->
+    <div class="grid grid-cols-1 gap-0 md:grid-cols-12">
+      <div class="col-span-1">
+        <h2 class="text-2xl leading-tight">Types:</h2>
+        <div v-for="type in this.typesEvents" v-bind:key="type.id">
+          <label class="inline-flex items-center mt-3">
+            <input
+              type="checkbox"
+              class="form-checkbox h-5 w-5 text-red-300"
+              checked
+              v-on:change="changeTypeToFilter(type.id)"
+            /><span class="ml-2">{{ type.label }}</span>
+          </label>
+        </div>
+      </div>
+      <div class="col-span-1 ml-10">
+        <h2 class="text-2xl leading-tight">Dates:</h2>
         <label class="inline-flex items-center mt-3">
-          <input
-            type="checkbox"
-            class="form-checkbox h-5 w-5 text-red-300"
-            checked
-            v-on:change="changeTypeToFilter(type.id)"
-          /><span class="ml-2">{{ type.label }}</span>
+          <input id="todayDate" type="date" v-model="todayDate" />
+          <span class="ml-2">Début</span>
+        </label>
+        <label class="inline-flex items-center mt-3">
+          <input id="twoWeeksDate" type="date" v-model="twoWeeksDate" />
+          <span class="ml-2">Fin</span>
         </label>
       </div>
-    </div>
-    <div class="col-span-1">
-      <input id="todayDate" type="date" v-model="todayDate" />
-      <input id="twoWeeksDate" type="date" v-model="twoWeeksDate" />
     </div>
   </div>
 </template>
