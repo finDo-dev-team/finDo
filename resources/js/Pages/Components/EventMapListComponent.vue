@@ -76,6 +76,7 @@
           </label>
         </div>
       </div>
+      <!-- Ligne date -->
       <div class="col-span-1 ml-10">
         <h2 class="text-2xl leading-tight">Dates:</h2>
         <label class="inline-flex items-center mt-3">
