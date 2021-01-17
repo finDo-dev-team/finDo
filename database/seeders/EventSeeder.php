@@ -17,7 +17,7 @@ class EventSeeder extends Seeder
         $events = [
             [
                 'title' => 'Brancion',
-                'date' => '2020-01-20',
+                'date' => '2021-01-20',
                 'location' => '1 rue de la Paix',
                 'latitude' => 48.832009,
                 'longitude' => 2.303149,
@@ -26,7 +26,7 @@ class EventSeeder extends Seeder
             ],
             [
                 'title' => 'Varenne',
-                'date' => '2020-01-21',
+                'date' => '2021-01-21',
                 'location' => '2 rue de la Paix',
                 'latitude' => 48.85664, 
                 'longitude' => 2.314891, 
@@ -35,7 +35,7 @@ class EventSeeder extends Seeder
             ],
             [
                 'title' => 'Montmartre',
-                'date' => '2020-01-22',
+                'date' => '2021-01-22',
                 'location' => '3 rue de la Paix',
                 'latitude' => 48.886759,
                 'longitude' => 2.343001,
@@ -44,7 +44,7 @@ class EventSeeder extends Seeder
             ],
             [
                 'title' => 'Chatelet',
-                'date' => '2020-01-23',
+                'date' => '2021-01-23',
                 'location' => '4 rue de la Paix',
                 'latitude' => 48.861997,
                 'longitude' => 2.347609,
@@ -53,7 +53,7 @@ class EventSeeder extends Seeder
             ],
             [
                 'title' => 'La Défense',
-                'date' => '2020-01-24',
+                'date' => '2021-01-24',
                 'location' => '5 rue de la Paix',
                 'latitude' => 48.890558,
                 'longitude' => 2.241611,
@@ -62,7 +62,7 @@ class EventSeeder extends Seeder
             ],
             [
                 'title' => 'Bercy',
-                'date' => '2020-01-25',
+                'date' => '2021-01-25',
                 'location' => '6 rue de la Paix',
                 'latitude' => 48.836836,
                 'longitude' => 2.382062,
