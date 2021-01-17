@@ -27,6 +27,9 @@
               v-bind:key="event.id"
               :lat-lng="event.latLng"
             >
+              <l-tooltip class="font-semibold font-sans text-base">
+                {{ event.title }}
+              </l-tooltip>
               <l-popup>
                 <p>
                   {{ event.description }}
@@ -68,8 +71,9 @@
     </div>
     <!-- Ligne Filtrage -->
     <div class="grid grid-cols-1 gap-0 md:grid-cols-12">
-      <div class="col-span-1">
-        <h2 class="text-2xl leading-tight">Types:</h2>
+      <!-- Colonne Types -->
+      <div class="col-span-1 bg-white rounded-lg shadow px-2 py-1 mt-2">
+        <h2 class="text-2xl leading-tight">Types</h2>
         <div v-for="type in this.typesEvents" v-bind:key="type.id">
           <label class="inline-flex items-center mt-3">
             <input
@@ -81,19 +85,29 @@
           </label>
         </div>
       </div>
-      <!-- Ligne date -->
-      <div class="col-span-2 ml-10">
-        <h2 class="text-2xl leading-tight">Dates:</h2>
+      <!-- Colonne date -->
+      <div class="col-span-2 ml-2 bg-white rounded-lg shadow px-2 py-1 mt-2">
+        <h2 class="text-2xl leading-tight">Dates</h2>
         <label class="inline-flex items-center mt-3">
-          <input id="todayDate" type="date" v-model="todayDate" />
+          <input
+            id="todayDate"
+            type="date"
+            v-model="startDate"
+            v-on:change="filterEvent()"
+          />
           <span class="ml-2">Début</span>
         </label>
         <label class="inline-flex items-center mt-3">
-          <input id="twoWeeksDate" type="date" v-model="twoWeeksDate" />
+          <input
+            id="twoWeeksDate"
+            type="date"
+            v-model="endDate"
+            v-on:change="filterEvent()"
+          />
           <span class="ml-2">Fin</span>
         </label>
       </div>
-      <!-- Ligne Recherche par ville -->
+      <!-- Colonne Recherche par ville
       <div class="col-span-3 ml-10">
         <h2 class="text-2xl leading-tight">Recherche:</h2>
         <input
@@ -103,6 +117,7 @@
           placeholder="Rechercher une vile"
         />
       </div>
+       -->
     </div>
   </div>
 </template>
@@ -156,8 +171,8 @@ export default {
           "pk.eyJ1IjoiamVzdGluLWciLCJhIjoiY2tqc3Z3bGM4NDRpcjJybzc1NXV1OGl6aiJ9.mlV-NsR4tljhmc20tbqstQ",
         style: "mapbox://styles/jestin-g/ckjswlvw30zyf19pgao32tb4h",
       },
-      todayDate: new Date().toISOString().substr(0, 10),
-      twoWeeksDate: new Date(Date.now() + 12096e5).toISOString().substr(0, 10),
+      startDate: new Date().toISOString().substr(0, 10),
+      endDate: new Date(Date.now() + 12096e5).toISOString().substr(0, 10),
     };
   },
 
@@ -178,7 +193,7 @@ export default {
       } else {
         this.addTypeToFilter(typeId);
       }
-      this.filterWithTypesToFilter();
+      this.filterEvent();
     },
 
     addTypeToFilter: function (typeId) {
@@ -192,7 +207,7 @@ export default {
       }
     },
 
-    filterWithTypesToFilter: function () {
+    filterEvent: function () {
       this.eventList = [];
       this.events.forEach((event) => {
         if (this.passFilter(event)) {
@@ -202,10 +217,23 @@ export default {
     },
 
     passFilter: function (event) {
+      return this.passFilterType(event) && this.passFilterDate(event);
+    },
+
+    passFilterType: function (event) {
       if (event.types.length == 0) return true;
       return event.types.some((type) =>
         this.typesToFilter.some((typeToFilter) => typeToFilter === type.id)
       );
+    },
+
+    passFilterDate: function (event) {
+      let eventDateSeconds = Date.parse(event.date);
+      let startDateSeconds = Date.parse(this.startDate);
+      let endDateSeconds = Date.parse(this.endDate);
+      if (eventDateSeconds < startDateSeconds) return false;
+      if (eventDateSeconds > endDateSeconds) return false;
+      return true;
     },
   },
 };
