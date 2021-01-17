@@ -77,7 +77,7 @@
         </div>
       </div>
       <!-- Ligne date -->
-      <div class="col-span-1 ml-10">
+      <div class="col-span-2 ml-10">
         <h2 class="text-2xl leading-tight">Dates:</h2>
         <label class="inline-flex items-center mt-3">
           <input id="todayDate" type="date" v-model="todayDate" />
@@ -87,6 +87,11 @@
           <input id="twoWeeksDate" type="date" v-model="twoWeeksDate" />
           <span class="ml-2">Fin</span>
         </label>
+      </div>
+      <!-- Ligne Recherche par ville -->
+      <div class="col-span-3 ml-10">
+        <h2 class="text-2xl leading-tight">Recherche:</h2>
+         <input class="w-full rounded p-2" type="text" v-model="q" placeholder="Rechercher une vile">
       </div>
     </div>
   </div>
