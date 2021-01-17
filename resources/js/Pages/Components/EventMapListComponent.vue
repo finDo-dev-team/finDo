@@ -27,6 +27,11 @@
               v-bind:key="event.id"
               :lat-lng="event.latLng"
             >
+              <l-popup>
+                <p>
+                  {{ event.description }}
+                </p>
+              </l-popup>
             </l-marker>
             <l-marker :lat-lng="withPopup">
               <l-popup>
@@ -91,7 +96,12 @@
       <!-- Ligne Recherche par ville -->
       <div class="col-span-3 ml-10">
         <h2 class="text-2xl leading-tight">Recherche:</h2>
-         <input class="w-full rounded p-2" type="text" v-model="q" placeholder="Rechercher une vile">
+        <input
+          class="w-full rounded p-2"
+          type="text"
+          v-model="q"
+          placeholder="Rechercher une vile"
+        />
       </div>
     </div>
   </div>
