@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-row h-full w-full">
+  <div class="flex flex-row h-screen w-full">
     <!-- Sidebar -->
     <nav class="w-20 justify-between flex flex-col shadow-inner bg-white">
       <div class="mt-10 mb-10">
@@ -119,7 +119,7 @@
       </div>
       -->
     </nav>
-    <div class="px-8 py-4 bg-gray-100 text-gray-800 w-full h-full">
+    <div class="py-2 md:px-8 md:py-4 bg-gray-100 text-gray-800 w-full h-full">
       <!-- Content -->
       <!-- Page Heading -->
       <header>

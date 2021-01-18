@@ -25,16 +25,22 @@ class EventController extends Controller
      */
     public function index()
     {
-        $events = Event::with('types')
-            ->orderBy('date', 'asc')
-            ->get();
-            
+        $events = Event::with('types')->orderBy('date', 'asc')->get();
+
+        $this->prepareEvents($events);
+                    
         $typesEvents = EventType::orderBy('label', 'asc')->get();
 
-        return Inertia::render('Event/Index', [
+        return $this->renderWithInertia('Event/Index', [
             'events' => $events,
             'typesEvents' => $typesEvents
         ]);
+    }
+
+    private function prepareEvents($events) {
+        foreach ($events as $event) {
+            $event->addLatLngField();
+        }
     }
 
     /**
@@ -45,7 +51,8 @@ class EventController extends Controller
     public function create()
     {
         $eventTypes = EventType::all();
-        return Inertia::render('Event/Create', [
+
+        return $this->renderWithInertia('Event/Create', [
             'eventTypes' => $eventTypes
         ]);
     }
@@ -58,22 +65,7 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'title' => ['required', 'max:50'],
-            'location' => ['required'],
-            'date' => ['required'],
-            'description' => ['required', 'max:500'],
-            'value' => ['required']
-        ], [
-            'title.required' => 'Le titre est obligatoire.',
-            'title.max' => 'Le titre ne doit pas dépasser :max caractères.',
-            'location.required'=> 'La localisation est obligatoire.',
-            'date.required'=> 'La date est obligatoire.',
-            'description.required'=> 'La description est obligatoire.',
-            'description.max' => 'La description ne doit pas dépasser :max caractères.',
-            'value.required'=> 'Veuillez choisir au moins une valeur dans la liste.',
-        ]);
-
+        $request->validate($eventCreationFormRules, $eventCreationFormRequired);
 
         $event = Event::create($request->all());
 
@@ -90,6 +82,24 @@ class EventController extends Controller
 
         return Redirect::route('events');
     }
+
+    private static $eventCreationFormRules = [
+            'title' => ['required', 'max:50'],
+            'location' => ['required'],
+            'date' => ['required'],
+            'description' => ['required', 'max:500'],
+            'value' => ['required']
+    ];
+
+    private static $eventCreationFormRequired = [
+        'title.required' => 'Le titre est obligatoire.',
+        'title.max' => 'Le titre ne doit pas dépasser :max caractères.',
+        'location.required'=> 'La localisation est obligatoire.',
+        'date.required'=> 'La date est obligatoire.',
+        'description.required'=> 'La description est obligatoire.',
+        'description.max' => 'La description ne doit pas dépasser :max caractères.',
+        'value.required'=> 'Veuillez choisir au moins une valeur dans la liste.',
+    ];
 
     /**
      * Display the specified resource.

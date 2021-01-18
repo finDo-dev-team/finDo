@@ -23,6 +23,7 @@ class HomeController extends Controller
             ->whereDate('date', '>=', date('Y-m-d'))
             ->get()
             ->take(3);
+            
         return Inertia::render('Home', compact('events'));
     }
 

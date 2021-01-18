@@ -16,11 +16,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        Event::factory(17)->create();
-        EventType::factory(4)->create();
+        $this->call(EventSeeder::class);
+        $this->call(EventTypeSeeder::class);
 
         /* On les ajoute un a un pour ne pas provquer d'erreur en tentant de créer un doublon */
-        for ($i = 0; $i < 30; $i++) {
+        for ($i = 0; $i < 8; $i++) {
             EventEventType::factory(1)->create();
         }
     }

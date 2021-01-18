@@ -1,67 +1,103 @@
 <template>
 
-  <div id="map"></div>
+  <div style="height: 500px; width: 100%">
+    <div style="height: 200px overflow: auto;">
+      <p>First marker is placed at {{ withPopup.lat }}, {{ withPopup.lng }}</p>
+      <p>Center is at {{ currentCenter }} and the zoom is: {{ currentZoom }}</p>
+      <button @click="showLongText">
+        Toggle long popup
+      </button>
+      <button @click="showMap = !showMap">
+        Toggle map
+      </button>
+    </div>
+    <l-map
+      v-if="showMap"
+      :zoom="zoom"
+      :center="center"
+      :options="mapOptions"
+      style="height: 80%"
+      @update:center="centerUpdate"
+      @update:zoom="zoomUpdate"
+    >
+      <l-tile-layer
+        :url="url"
+        :attribution="attribution"
+      />
+      <l-marker :lat-lng="withPopup">
+        <l-popup>
+          <div @click="innerClick">
+            I am a popup
+            <p v-show="showParagraph">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque
+              sed pretium nisl, ut sagittis sapien. Sed vel sollicitudin nisi.
+              Donec finibus semper metus id malesuada.
+            </p>
+          </div>
+        </l-popup>
+      </l-marker>
+      <l-marker :lat-lng="withTooltip">
+        <l-tooltip :options="{ permanent: true, interactive: true }">
+          <div @click="innerClick">
+            I am a tooltip
+            <p v-show="showParagraph">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque
+              sed pretium nisl, ut sagittis sapien. Sed vel sollicitudin nisi.
+              Donec finibus semper metus id malesuada.
+            </p>
+          </div>
+        </l-tooltip>
+      </l-marker>
+    </l-map>
+  </div>
 </template>
 
 <script>
-import "leaflet/dist/leaflet.css";
-import "esri-leaflet-geocoder/dist/esri-leaflet-geocoder.css";
 import { latLng } from "leaflet";
-import * as esri from "esri-leaflet-geocoder";
+import { LMap, LTileLayer, LMarker, LPopup, LTooltip } from "vue2-leaflet";
+import 'leaflet/dist/leaflet.css';
+
 
 export default {
-  mounted() {
-    this.init();
+  name: "Example",
+  components: {
+    LMap,
+    LTileLayer,
+    LMarker,
+    LPopup,
+    LTooltip
   },
-
+  data() {
+    return {
+      zoom: 13,
+      center: latLng(47.41322, -1.219482),
+      url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+      attribution:
+        '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+      withPopup: latLng(47.41322, -1.219482),
+      withTooltip: latLng(47.41422, -1.250482),
+      currentZoom: 11.5,
+      currentCenter: latLng(47.41322, -1.219482),
+      showParagraph: false,
+      mapOptions: {
+        zoomSnap: 0.5
+      },
+      showMap: true
+    };
+  },
   methods: {
-    init() {
-      var map = L.map("map", { center: [51.505, -13.02626], zoom: 13 }),
-        onLocationFound = function (e) {
-          var radius = e.accuracy / 2;
-          //L.marker(e.latlng).addTo(map)
-          L.circle(e.latlng, radius).addTo(map);
-          console.log(e.latlng);
-        };
-      function onLocationError(e) {
-        alert(e.message);
-      }
-
-                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                    attribution: '&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors'
-                }).addTo(map);
-
-      map.on("locationfound", onLocationFound);
-      map.on("locationerror", onLocationError);
-      map.locate({ setView: true, maxZoom: 16 });
-
-      const searchControl = new esri.Geosearch().addTo(map);
-      const results = L.layerGroup().addTo(map);
-      searchControl.on('results', function (data) {
-            results.clearLayers();
-            for (let i = data.results.length - 1; i >= 0; i--) {
-                results.addLayer(L.marker(data.results[i].latlng));
-            }
-      });
+    zoomUpdate(zoom) {
+      this.currentZoom = zoom;
     },
-  },
+    centerUpdate(center) {
+      this.currentCenter = center;
+    },
+    showLongText() {
+      this.showParagraph = !this.showParagraph;
+    },
+    innerClick() {
+      alert("Click!");
+    }
+  }
 };
 </script>
-<style>
-#map {
-  width: 80%;
-  height: 500px;
-  margin-right: 10px;
-  margin-left: 100px;
-  padding-bottom: 1px;
-  border-radius: 1%;
-  border: thick double #32a1ce;
-}
-
-html,
-body {
-  margin: 0;
-  padding: 0;
-  background-color: rgb(230, 232, 233);
-}
-</style>

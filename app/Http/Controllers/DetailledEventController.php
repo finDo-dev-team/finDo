@@ -13,12 +13,11 @@ class DetailledEventController extends Controller
      * 
      * @return Inertia\Inertia\Response
      */
-
     public function index()
     {
-    $events = Event::where('id', 'like', request('q'))->get();
-            return Inertia::render('DetailledEvent', compact('events'));
+        $events = Event::where('id', 'like', request('q'))->get();
         
+        return Inertia::render('DetailledEvent', compact('events'));
     }
 
 }

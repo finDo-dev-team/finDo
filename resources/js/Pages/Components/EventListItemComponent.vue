@@ -1,6 +1,6 @@
 <template>
   <div
-    class="rounded overflow-hidden shadow h-full bg-white relative hover:shadow-2xl duration-500 ease-in-out"
+    class="rounded overflow-hidden mb-2 shadow bg-white relative hover:shadow-2xl duration-500 ease-in-out"
   >
     <div class="px-6 py-4 mb-16">
       <p class="text-gray-600 text-xs">
