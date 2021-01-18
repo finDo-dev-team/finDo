@@ -1,18 +1,18 @@
 <template>
   <app-layout>
     <template #header>Evenements</template>
-    <EventList :events="this.eventList" :typesEvents="this.typeEventList"></EventList>
+    <EventMapList :events="this.eventList" :typesEvents="this.typeEventList"></EventMapList>
   </app-layout>
 </template>
 
 <script>
 import AppLayout from "./../../Layouts/AppLayout";
-import EventList from "../Components/EventListComponent";
+import EventMapList from "../Components/EventMapListComponent";
 
 export default {
   components: {
     AppLayout,
-    EventList,
+    EventMapList,
   },
 
   props: [
@@ -28,7 +28,7 @@ export default {
   },
 
   mounted() {
-    console.log(this.typeEventList);
+    // display data
   },
 };
 </script>

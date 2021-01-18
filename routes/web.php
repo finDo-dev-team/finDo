@@ -7,6 +7,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\DetailledEventController;
+use App\Http\Controllers\MapController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,6 +41,8 @@ Route::get('/events', [EventController::class, 'index'])->name('events');
 Route::get('/event/create', [EventController::class, 'create']);
 
 Route::post('/event/store', [EventController::class, 'store']);
+
+Route::get('/mapRefonte', [MapController::class, 'index']);
 
 
 
