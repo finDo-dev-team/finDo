@@ -1,7 +1,7 @@
 <template>
   <app-layout>
     <template #header> Rechercher un événement </template>
-    
+
     <br />
     <!--
     <input
@@ -16,8 +16,11 @@
     <br />
     <search-component>
       <template slot="search"> </template>
+      <br/>
+      <template slot="distance"></template>
     </search-component>
     <br />
+
     <!--
     <div v-for="event in this.eventList" v-bind:key="event.id">
       <div class="max-w-sm rounded overflow-hidden shadow-lg">
@@ -39,6 +42,7 @@
       </div>
     </div>
     -->
+
     <div
         class="col-span-10 grid grid-cols-1 gap-2 lg:grid-cols-2 2xl:grid-cols-3"
       >
@@ -71,6 +75,7 @@ export default {
     return {
       eventList: this.events,
       q: "",
+      distance: ""
     };
   },
 
@@ -84,6 +89,20 @@ export default {
       } else {
         axios
           .get("/search2/")
+          .then((response) => (this.eventList = response.data))
+          .catch((error) => console.log(error));
+      }
+    },
+
+    searchEventsWithDistance(){
+              if (this.distance.length > 1) {
+        axios
+          .get("/search3/" + this.distance)
+          .then((response) => (this.eventList = response.data))
+          .catch((error) => console.log(error));
+      } else {
+        axios
+          .get("/search3/")
           .then((response) => (this.eventList = response.data))
           .catch((error) => console.log(error));
       }
