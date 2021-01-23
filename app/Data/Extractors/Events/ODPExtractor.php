@@ -3,10 +3,12 @@ namespace App\Data\Extractors\Events;
 
 use Carbon\Carbon;
 use App\Models\Event;
+use App\Models\EventType;
 use Illuminate\Support\Collection;
 use App\Models\Builder\EventBuilder;
 use Illuminate\Support\Facades\Http;
 use App\Data\Extractors\Events\APIExtractor;
+
 
 class ODPExtractor implements APIExtractor {
 
@@ -14,6 +16,7 @@ class ODPExtractor implements APIExtractor {
    
     private array $records;
     private Collection $events;
+
 
     public function __construct()
     {
@@ -26,6 +29,8 @@ class ODPExtractor implements APIExtractor {
         $this->getRecordsFromApi(ODPExtractor::$queryNext2WeeksEvents);
         $this->recordsToEvents();
     }
+
+    
     
     private function getRecordsFromApi($apiQuery): void
     {
@@ -33,12 +38,23 @@ class ODPExtractor implements APIExtractor {
         $this->records = $response['records'];
     }
 
+ 
+
     private function recordsToEvents(): void
     {
         foreach($this->records as $record) {
+            $this->retrieveOrCreateEventType($record);
             $this->events[] = $this->recordToEvent($record);
         }
     }
+
+    private function retrieveOrCreateEventType($record)
+    {
+        $recordFields = $record['fields'];
+        $eventType = EventType::firstOrCreate(['label'=>trim(preg_replace('/->.*/','',$recordFields['category']))]);
+        
+    }
+
 
     private function recordToEvent(array $record): Event
     {
@@ -57,7 +73,7 @@ class ODPExtractor implements APIExtractor {
             ->addAddressStreet($recordFields['address_street'])
             ->addLatitude($recordFields['lat_lon'][0])
             ->addLongitude($recordFields['lat_lon'][1]);
-        
+        //ajouter le type d'event
         return $eventBuilder->build();
     }
 
