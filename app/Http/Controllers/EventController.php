@@ -25,7 +25,11 @@ class EventController extends Controller
      */
     public function index()
     {
-        $events = Event::with('types')->orderBy('date_start', 'asc')->get();
+        $events = Event::with('types')
+            ->orderBy('date_start', 'asc')
+            ->whereNotNull('latitude')
+            ->whereNotNull('longitude')
+            ->get();
 
         $this->prepareEvents($events);
                     
