@@ -16,6 +16,8 @@
     <br />
     <search-component>
       <template slot="search"> </template>
+      <br/>
+      <template slot="distance"></template>
     </search-component>
     <br />
 
@@ -73,6 +75,7 @@ export default {
     return {
       eventList: this.events,
       q: "",
+      distance: ""
     };
   },
 
@@ -86,6 +89,20 @@ export default {
       } else {
         axios
           .get("/search2/")
+          .then((response) => (this.eventList = response.data))
+          .catch((error) => console.log(error));
+      }
+    },
+
+    searchEventsWithDistance(){
+              if (this.distance.length > 1) {
+        axios
+          .get("/search3/" + this.distance)
+          .then((response) => (this.eventList = response.data))
+          .catch((error) => console.log(error));
+      } else {
+        axios
+          .get("/search3/")
           .then((response) => (this.eventList = response.data))
           .catch((error) => console.log(error));
       }
