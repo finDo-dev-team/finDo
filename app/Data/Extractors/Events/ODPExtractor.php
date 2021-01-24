@@ -7,79 +7,107 @@ use App\Models\EventType;
 use Illuminate\Support\Collection;
 use App\Models\Builder\EventBuilder;
 use Illuminate\Support\Facades\Http;
-use App\Data\Extractors\Events\APIExtractor;
-
+use App\Data\Extractors\Events\ODPExtractor;
 
 class ODPExtractor implements APIExtractor {
 
     private static $queryNext2WeeksEvents = 'https://opendata.paris.fr/api/records/1.0/search/?dataset=que-faire-a-paris-&q=date_start+%3E+%23now()+AND+date_start+%3C%3D+%23now(weeks%3D%2B2)&rows=1000';
    
     private array $records;
-    private Collection $events;
-
+    private Collection $eventsCreated;
 
     public function __construct()
     {
         $this->records = array();
-        $this->events = collect([]);
+        $this->eventsCreated = collect([]);
     }
 
-    public function prepareEvents(): void
+    public function addEventsToDB(): void
     {
         $this->getRecordsFromApi(ODPExtractor::$queryNext2WeeksEvents);
-        $this->recordsToEvents();
+        $this->createEventsFromRecords();
     }
 
-    
-    
     private function getRecordsFromApi($apiQuery): void
     {
         $response = Http::get($apiQuery);
         $this->records = $response['records'];
     }
 
- 
-
-    private function recordsToEvents(): void
+    private function createEventsFromRecords(): void
     {
         foreach($this->records as $record) {
-            $this->retrieveOrCreateEventType($record);
-            $this->events[] = $this->recordToEvent($record);
+            $this->createEventFromRecord($record);
         }
     }
 
-    private function retrieveOrCreateEventType($record)
+    private function createEventFromRecord(array $record): void
     {
-        $recordFields = $record['fields'];
-        $eventType = EventType::firstOrCreate(['label'=>trim(preg_replace('/->.*/','',$recordFields['category']))]);
-        
+        $event = $this->createEventFields($record['fields']);
+
+        $eventType = $this->setEventType($record['fields']['category']);
+
+        $this->attachEventTypeToEvent($event, $eventType);
+
+        $this->eventsCreated[] = $event;
     }
 
-
-    private function recordToEvent(array $record): Event
+    private function createEventFields(array $fields): Event
     {
-        $recordFields = $record['fields'];
-
         $eventBuilder = new EventBuilder();
 
-        $eventBuilder->addTitle($recordFields['title'])
-            ->addLeadText($recordFields['lead_text'])
-            ->addDescription($recordFields['description'])
-            ->addDateStart(Carbon::create($recordFields['date_start']))
-            ->addDateEnd(Carbon::create($recordFields['date_end']))
-            ->addAddressName($recordFields['address_name'])
-            ->addAddressCity($recordFields['address_city'])
-            ->addAddressZipCode($recordFields['address_zipcode'])
-            ->addAddressStreet($recordFields['address_street'])
-            ->addLatitude($recordFields['lat_lon'][0])
-            ->addLongitude($recordFields['lat_lon'][1]);
-        //ajouter le type d'event
-        return $eventBuilder->build();
+        $event = $eventBuilder
+            ->addTitle($fields['title'])
+            ->addLeadText($fields['lead_text'])
+            ->addDescription($fields['description'])
+            ->addDateStart(Carbon::create($fields['date_start']))
+            ->addDateEnd(Carbon::create($fields['date_end']))
+            ->addAddressName($fields['address_name'])
+            ->addAddressCity($fields['address_city'])
+            ->addAddressZipCode($fields['address_zipcode'])
+            ->addAddressStreet($fields['address_street'])
+            ->addLatitude($fields['lat_lon'][0])
+            ->addLongitude($fields['lat_lon'][1])
+            ->build();
+        
+        $event->save();
+        
+        return $event;
     }
 
-    public function getEvents(): Collection
+    private function setEventType(?string $label)
     {
-        return $this->events;
+        if ($label != null) {
+            return $this->retrieveOrCreateEventType($label);
+        }
+
+        return null;
+    }
+    
+    private function retrieveOrCreateEventType(string $label): EventType
+    {
+        $eventType = EventType::firstOrCreate([
+            'label' => $this->formatFieldCategory($label)
+        ]);
+
+        return $eventType;
     }
 
+
+    private function formatFieldCategory(string $category): string
+    {
+        return trim(preg_replace('/->.*/','',$category));
+    }
+
+    private function attachEventTypeToEvent(Event $event, ?EventType $eventType): void
+    {
+        if ($eventType != null) {
+            $event->types()->attach($eventType->id);
+        }
+    }
+
+    public function getEventsCreated(): Collection
+    {
+        return $this->eventsCreated;
+    }
 }

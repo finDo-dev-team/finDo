@@ -4,7 +4,7 @@
   >
     <div class="px-6 py-4 mb-16">
       <p class="text-gray-600 text-xs">
-        {{ event.date }}
+        {{ event.date_start }}
       </p>
       <div class="inline-flex">
         <div class="px-0.5" v-for="type in event.types" v-bind:key="type.id">
@@ -17,7 +17,7 @@
       </div>
       <div class="font-bold text-xl mb-2">{{ event.title }}</div>
       <p class="text-gray-700 text-base">
-        {{ event.description }}
+        {{ event.lead_text }}
       </p>
     </div>
     <div class="px-6 pb-2 absolute bottom-0">
