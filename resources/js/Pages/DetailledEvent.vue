@@ -21,7 +21,7 @@
       <div class="px-6 pt-4 pb-2">
         <span
           class="inline-block bg-gray-100 rounded-full px-3 py-1 text-xs font-semibold text-gray-700 mr-2 mb-2"
-          >{{ event.address_name }}, {{event.address_city}}, {{event.address_zipcode}}</span
+          >{{ event.address_name }}, {{event.address_street}}, {{event.address_city}}, {{event.address_zipcode}}</span
         >
       </div>
      <map-event-component></map-event-component>
