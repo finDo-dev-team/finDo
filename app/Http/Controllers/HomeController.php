@@ -19,8 +19,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $events = Event::orderBy('date', 'asc')
-            ->whereDate('date', '>=', date('Y-m-d'))
+        $events = Event::orderBy('date_start', 'asc')
+            ->whereDate('date_start', '>=', date('Y-m-d'))
             ->get()
             ->take(3);
             

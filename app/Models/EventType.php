@@ -9,6 +9,8 @@ class EventType extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['label'];
+
     /**
      * Définit la relation "Many To Many" entre Type et Event.
      * 

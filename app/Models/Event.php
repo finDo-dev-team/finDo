@@ -9,13 +9,6 @@ class Event extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'title',
-        'location',
-        'date',
-        'description'
-    ];
-
     protected $casts = [
         'latitude' => 'double',
         'longitude' => 'double',
