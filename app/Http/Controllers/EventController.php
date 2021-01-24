@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\DB;
 use Facade\Ignition\ErrorPage\Renderer;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
-use GeoIPLocation;
 
 /**
  * Controlleur des événements
@@ -103,38 +102,6 @@ class EventController extends Controller
         'value.required'=> 'Veuillez choisir au moins une valeur dans la liste.',
     ];
 
-    private function calculDistance($latitude1,$longitude1,$latitude2,$longitude2){
-
-        $x = ($longitude2 - $longitude1)*cos(($latitude1 + $latitude2)/2);
-        $y = $latitude2 - $latitude1;
-        $distance = sqrt(pow($x,2)+pow($y,2));
-
-        return $distance*1.852; // distance en km
-
-    }
-
-
-    public function getEventsWith(){
-
-        if (request('distance') != null) {
-
-            $events = array();
-
-            $getEvents = Event::with('types')->orderBy('date', 'asc')->get();
-
-            foreach($getEvents as $event){
-                if($this->calculDistance(GeoIPLocation::getLatitude(),GeoIPLocation::getLongitude(),$event->latitude,$event->longitude) <= request('distance')){
-
-                    array_push($events, $event);
-                }
-            }
-            return Inertia::render('Search', ['events' => $events]);
-
-        }
-        else {
-            return Redirect::route('seach');
-        }
-    }
     /**
      * Display the specified resource.
      *
