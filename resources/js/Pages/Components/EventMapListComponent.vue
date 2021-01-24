@@ -88,6 +88,19 @@
           <span class="ml-2">Fin</span>
         </label>
       </div>
+
+ <!-- colonne distance-->
+      <div class="col-span-2 ml-2 bg-white rounded-lg shadow px-2 py-1 mt-2">
+        <h2 class="text-2xl leading-tight">Distance</h2>
+        <label class="inline-flex items-center mt-3">
+          <span class="ml-2">Moins de </span>
+          <select  v-model="distance" v-on:change="filterEvent()">
+          <option v-for="option in distanceValue" v-bind:key="option.text" v-bind:value="option.value">
+              {{option.text}}
+          </option>
+          </select>
+        </label>
+        </div>
       <!-- Colonne Recherche par ville
       <div class="col-span-3 ml-10">
         <h2 class="text-2xl leading-tight">Recherche:</h2>
@@ -154,6 +167,13 @@ export default {
       },
       startDate: new Date().toISOString().substr(0, 10),
       endDate: new Date(Date.now() + 12096e5).toISOString().substr(0, 10),
+      distance:'',
+      distanceValue: [
+          {text: '10 km', value: 10},
+          {text: '20 km', value: 20},
+          {text: '30 km', value: 30},
+          {text: '50 km', value: 50},
+      ],
     };
   },
 
@@ -198,7 +218,7 @@ export default {
     },
 
     passFilter: function (event) {
-      return this.passFilterType(event) && this.passFilterDate(event);
+      return this.passFilterType(event) && this.passFilterDate(event) && this.passFilterDistance(event);
     },
 
     passFilterType: function (event) {
@@ -216,6 +236,24 @@ export default {
       if (eventDateSeconds > endDateSeconds) return false;
       return true;
     },
+
+
+    calculDistance: function(latitude1,longitude1,latitude2,longitude2){
+
+        const dlon = longitude2 - longitude1;
+        const dlat = latitude2 - latitude1;
+        const a = Math.pow(Math.sin(dlat/2),2) + Math.cos(latitude1) * Math.cos(latitude2) * Math.pow(Math.sin(dlon/2),2);
+        const c = 2 * Math.atan2( Math.sqrt(a), Math.sqrt(1-a) );
+        return  6373 * c //  6373 est le rayon entre le centre de la terre et l'équateur
+
+    },
+
+    passFilterDistance: function(event){
+        if( (this.calculDistance(this.$position.latitude,this.$position.longitude,event.latitude,event.longitude)).toFixed(2) > parseInt(this.distance).toFixed(2)) return false;
+        return true;
+
+    },
+
   },
 };
 </script>
