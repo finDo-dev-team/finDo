@@ -11,6 +11,10 @@ Vue.use(InertiaForm);
 Vue.use(PortalVue);
 
 const app = document.getElementById('app');
+//variable global de localisation de l'utilisateur
+navigator.geolocation.getCurrentPosition(function(pos){
+    Vue.prototype.$position = pos.coords;
+});
 
 new Vue({
     render: (h) =>
