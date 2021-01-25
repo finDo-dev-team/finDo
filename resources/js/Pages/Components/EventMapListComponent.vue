@@ -32,28 +32,9 @@
               </l-tooltip>
               <l-popup>
                 <p>
-                  {{ event.description }}
+                  {{ event.lead_text }}
                 </p>
               </l-popup>
-            </l-marker>
-            <l-marker :lat-lng="withPopup">
-              <l-popup>
-                <p v-show="showParagraph">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Quisque sed pretium nisl, ut sagittis sapien. Sed vel
-                  sollicitudin nisi. Donec finibus semper metus id malesuada.
-                </p>
-              </l-popup>
-            </l-marker>
-            <l-marker :lat-lng="withTooltip">
-              <l-tooltip :options="{ permanent: true, interactive: true }">
-                I am a tooltip
-                <p v-show="showParagraph">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Quisque sed pretium nisl, ut sagittis sapien. Sed vel
-                  sollicitudin nisi. Donec finibus semper metus id malesuada.
-                </p>
-              </l-tooltip>
             </l-marker>
           </l-map>
         </div>
@@ -228,7 +209,7 @@ export default {
     },
 
     passFilterDate: function (event) {
-      let eventDateSeconds = Date.parse(event.date);
+      let eventDateSeconds = Date.parse(event.date_start);
       let startDateSeconds = Date.parse(this.startDate);
       let endDateSeconds = Date.parse(this.endDate);
       if (eventDateSeconds < startDateSeconds) return false;

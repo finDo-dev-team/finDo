@@ -4,7 +4,7 @@
   >
     <div class="px-6 py-4 mb-16">
       <p class="text-gray-600 text-xs">
-        {{ event.date }}
+        {{ event.date_start }}
       </p>
       <div class="inline-flex">
         <div class="px-0.5" v-for="type in event.types" v-bind:key="type.id">
@@ -17,13 +17,13 @@
       </div>
       <div class="font-bold text-xl mb-2">{{ event.title }}</div>
       <p class="text-gray-700 text-base">
-        {{ event.description }}
+        {{ event.lead_text }}
       </p>
     </div>
     <div class="px-6 pb-2 absolute bottom-0">
       <span
         class="inline-block bg-gray-100 rounded-full px-3 py-1 text-xs font-semibold text-gray-700 mr-2 mb-2"
-        >{{ event.location }}</span
+        >{{ event.address_name }}, {{event.address_street}}, {{event.address_city}}, {{event.address_zipcode}}</span
       >
       <a class="rounded-full px-2 hover:bg-gray-100 duration-200 ease-in-out" :href="'/DetailledEvent/' + event.id"> Plus d'info... </a>
     </div>

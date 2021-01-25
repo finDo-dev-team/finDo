@@ -21,8 +21,8 @@ class SearchController extends Controller
             $events = Event::where('title', 'like', request('q') . '%')->get();
             return Inertia::render('Search', ['events' => $events]);
         } else {
-            $events = Event::orderBy('date', 'asc')
-                ->whereDate('date', '>=', date('Y-m-d'))
+            $events = Event::orderBy('date_start', 'asc')
+                ->whereDate('date_start', '>=', date('Y-m-d'))
                 ->get();
             return Inertia::render('Search', compact('events'));
         }
