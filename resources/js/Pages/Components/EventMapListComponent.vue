@@ -187,6 +187,8 @@ export default {
       endDate: new Date(Date.now() + 12096e5).toISOString().substr(0, 0),
       distance:'',
       distanceValue: [
+          {text: '2 km', value: 2},
+          {text: '5 km', value: 5},
           {text: '10 km', value: 10},
           {text: '20 km', value: 20},
           {text: '30 km', value: 30},
