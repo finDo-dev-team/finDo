@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Event extends Model
 {
@@ -29,5 +30,17 @@ class Event extends Model
         $latLng = array();
         \array_push($latLng, $this->latitude, $this->longitude);
         $this->latLng = $latLng;
+    }
+
+    public function addCheckSum()
+    {
+        //Hash Titre (regex tout en miscule pas d'espace pas de tiret) + desc rapide 
+
+        $chaine=$this->title.$this->lead_text;
+
+        $hash= trim(strtolower(str_replace('.','',$chaine)));
+        $hash2=hash('ripemd128', $chaine);
+        $this->checkSum= $hash2;
+
     }
 }

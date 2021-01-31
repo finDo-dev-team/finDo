@@ -26,6 +26,7 @@ class CreateEventsTable extends Migration
             $table->text('address_street')->nullable();
             $table->decimal('longitude', 10, 7)->nullable();
             $table->decimal('latitude', 10, 7)->nullable();
+            $table->string('checkSum')->nullable();
             $table->timestamps();
         });
     }
