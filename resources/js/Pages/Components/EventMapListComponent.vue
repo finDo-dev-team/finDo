@@ -13,6 +13,8 @@
             :center="center"
             :options="mapOptions"
             :inertia="true"
+            @ready="onReady"
+            @locationfound="onLocationFound"
           >
             <l-tile-layer
               :options="layerOptions"
@@ -23,9 +25,23 @@
               :prefix="attribution"
             ></l-control-attribution>
             <l-marker
+              :lat-lng="[userLocation.lat,userLocation.lng]"
+              :icon="icone1"
+            >
+              <l-tooltip class="font-semibold font-sans text-base">
+                Vous êtes ici !
+              </l-tooltip>
+            </l-marker>
+           <L-circle
+            :lat-lng="[userLocation.lat,userLocation.lng]"
+            :stroke="true"
+            />
+            <l-marker
               v-for="event in this.eventList"
               v-bind:key="event.id"
               :lat-lng="event.latLng"
+              :icon="icone2"
+
             >
               <l-tooltip class="font-semibold font-sans text-base">
                 {{ event.title }}
@@ -118,7 +134,8 @@
 
 <script>
 import EventListItem from "./EventListItemComponent";
-import { latLng } from "leaflet";
+import { latLng, icon } from "leaflet";
+import {LAwesomeMarkersIcon} from "leaflet.awesome-markers";
 import {
   LMap,
   LTileLayer,
@@ -126,12 +143,13 @@ import {
   LPopup,
   LTooltip,
   LControlAttribution,
+  LCircle
 } from "vue2-leaflet";
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl-leaflet";
 import "mapbox-gl/dist/mapbox-gl.css";
 import "leaflet/dist/leaflet.css";
-
+import "leaflet.awesome-markers/dist/leaflet.awesome-markers.css";
 export default {
   name: "EventMapList",
 
@@ -144,7 +162,7 @@ export default {
       // Map
       zoom: 12.5,
       maxZoom: 18,
-      minZoom: 13,
+      minZoom: 8,
       attribution:
         'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
       center: latLng(48.859043, 2.342759),
@@ -165,8 +183,8 @@ export default {
           "pk.eyJ1IjoiamVzdGluLWciLCJhIjoiY2tqc3Z3bGM4NDRpcjJybzc1NXV1OGl6aiJ9.mlV-NsR4tljhmc20tbqstQ",
         style: "mapbox://styles/jestin-g/ckjswlvw30zyf19pgao32tb4h",
       },
-      startDate: new Date().toISOString().substr(0, 10),
-      endDate: new Date(Date.now() + 12096e5).toISOString().substr(0, 10),
+      startDate: new Date().toISOString().substr(0, 0),
+      endDate: new Date(Date.now() + 12096e5).toISOString().substr(0, 0),
       distance:'',
       distanceValue: [
           {text: '10 km', value: 10},
@@ -174,6 +192,17 @@ export default {
           {text: '30 km', value: 30},
           {text: '50 km', value: 50},
       ],
+      userLocation: {
+          lat: '',
+          lng: ''
+      },
+      icone1: L.AwesomeMarkers.icon( {
+            markerColor : 'red'
+      }),
+      icone2: L.AwesomeMarkers.icon( {
+            markerColor : 'darkblue'
+      }),
+
     };
   },
 
@@ -185,6 +214,7 @@ export default {
     LPopup,
     LTooltip,
     LControlAttribution,
+    LCircle,
   },
 
   methods: {
@@ -237,24 +267,36 @@ export default {
       return true;
     },
 
-
+    //Calcul la distance entre 2 coordonnées géographique
     calculDistance: function(latitude1,longitude1,latitude2,longitude2){
 
-        const dlon = longitude2 - longitude1;
-        const dlat = latitude2 - latitude1;
-        const a = Math.pow(Math.sin(dlat/2),2) + Math.cos(latitude1) * Math.cos(latitude2) * Math.pow(Math.sin(dlon/2),2);
-        const c = 2 * Math.atan2( Math.sqrt(a), Math.sqrt(1-a) );
-        return  6373 * c //  6373 est le rayon entre le centre de la terre et l'équateur
+
+       const RADIAN = 57.29577951;
+       const a = Math.acos((Math.sin(latitude1/RADIAN)*Math.sin(latitude2/RADIAN)+Math.cos(latitude1/RADIAN)*Math.cos(latitude2/RADIAN)*Math.cos((longitude2/RADIAN)-(longitude1/RADIAN))));
+       return 6373*a; //  6373 est le rayon entre le centre de la terre et l'équateur
+
+    },
+    //Filtre les événements en fonction de leur distance par rapport à l'utilisateur
+    passFilterDistance: function(event){
+
+        if( (this.calculDistance(this.userLocation.lat,this.userLocation.lng,event.latitude,event.longitude)).toFixed(2) <= this.distance) return true;
+
+        return false;
 
     },
 
-    passFilterDistance: function(event){
-        if( (this.calculDistance(this.$position.latitude,this.$position.longitude,event.latitude,event.longitude)).toFixed(2) > parseInt(this.distance).toFixed(2)) return false;
-        return true;
-
+    onReady (mapObject) {
+        mapObject.locate();
+    },
+    onLocationFound(location){
+        this.userLocation = {
+            lat: location.latitude,
+            lng: location.longitude
+        };
     },
 
   },
+
 };
 </script>
 
