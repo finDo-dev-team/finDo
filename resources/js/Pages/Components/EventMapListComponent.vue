@@ -183,9 +183,9 @@ export default {
           "pk.eyJ1IjoiamVzdGluLWciLCJhIjoiY2tqc3Z3bGM4NDRpcjJybzc1NXV1OGl6aiJ9.mlV-NsR4tljhmc20tbqstQ",
         style: "mapbox://styles/jestin-g/ckjswlvw30zyf19pgao32tb4h",
       },
-      startDate: new Date().toISOString().substr(0, 0),
-      endDate: new Date(Date.now() + 12096e5).toISOString().substr(0, 0),
-      distance:'',
+      startDate: new Date().toISOString().substr(0, 10),
+      endDate: new Date(Date.now() + 12096e5).toISOString().substr(0, 10),
+      distance:'50',
       distanceValue: [
           {text: '2 km', value: 2},
           {text: '5 km', value: 5},
