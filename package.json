@@ -31,6 +31,7 @@
         "esri-leaflet-geocoder": "^2.3.3",
         "leaflet": "^1.7.1",
         "leaflet-geosearch": "^3.0.6",
+        "leaflet.awesome-markers": "^2.0.5",
         "mapbox-gl": "^2.0.1",
         "mapbox-gl-leaflet": "0.0.14",
         "uuid": "^8.3.1",

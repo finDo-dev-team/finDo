@@ -44,7 +44,7 @@ class ODPExtractor implements APIExtractor {
     private function createEventFromRecord(array $record): void
     {
         $event = $this->createEventFields($record['fields']);
-
+        
         $eventType = $this->setEventType($record['fields']['category']);
 
         $this->attachEventTypeToEvent($event, $eventType);
@@ -69,11 +69,19 @@ class ODPExtractor implements APIExtractor {
             ->addLatitude($fields['lat_lon'][0])
             ->addLongitude($fields['lat_lon'][1])
             ->build();
-        
-        $event->save();
-        
+        $event->addCheckSum();
+
+        if($this->checkSum($event)) $event->save();
         return $event;
     }
+
+    private function checkSum($event) : bool
+    {
+        if (Event::where('checkSum', '=', $event->checkSum)->exists()) return false;
+        else return true;
+
+    }
+
 
     private function setEventType(?string $label)
     {
@@ -101,7 +109,7 @@ class ODPExtractor implements APIExtractor {
 
     private function attachEventTypeToEvent(Event $event, ?EventType $eventType): void
     {
-        if ($eventType != null) {
+        if ($eventType != null && $event->id != null) {
             $event->types()->attach($eventType->id);
         }
     }
