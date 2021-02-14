@@ -14,11 +14,9 @@
             {{ type.label }}
 
           </span>
-                &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
           <span class=" inline-block ">
-            <a :href="'/download/' + event.id" class="rounded-full bg-red-200 text-white px-1 py-0.5  btn btn-info hover:bg-red-700 duration-200 ease-in-out">Ajouter au calendrier</a>
-                 &emsp;&emsp;&emsp;&emsp;
-            <a :href="'/favorite/' + event.id" class="rounded-full bg-red-200  text-white px-1 py-0.5  btn btn-info hover:bg-red-700 duration-200 ease-in-out">Ajouter au fovoris</a>
+            <a :href="'/download/' + event.id" class="rounded-full bg-red-400 text-white px-1 py-0.5 focus:bg-red-800 duration-200 ease-in-out">Ajouter au calendrier</a>
           </span>
         </div>
       </div>

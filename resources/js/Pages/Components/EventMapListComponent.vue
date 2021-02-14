@@ -3,7 +3,7 @@
     <!-- Ligne Map + List -->
     <div class="grid grid-cols-1 gap-0 md:grid-cols-12 h-screen2/3">
       <!-- Colonne carte -->
-      <div class="md:col-span-5 lg:col-span-6">
+      <div class="md:col-span-7 lg:col-span-8">
         <div class="h-screen2/3 md:h-full w-full">
           <l-map
             v-if="showMap"
@@ -56,7 +56,7 @@
         </div>
       </div>
       <div
-        class="md:overflow-y-auto max-h-screen md:col-span-5 lg:col-span-6 no-scrollbar"
+        class="md:overflow-y-auto max-h-screen md:col-span-5 lg:col-span-4 no-scrollbar"
       >
         <!-- Colonne liste -->
         <EventListItem
