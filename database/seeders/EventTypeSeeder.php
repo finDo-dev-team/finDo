@@ -16,19 +16,19 @@ class EventTypeSeeder extends Seeder
     {
         $eventTypes = [
             [
-                'label' => 'sport'
+                'label' => 'Sportifs'
             ],
             [
-                'label' => 'culture'
+                'label' => 'Expositions'
             ],
             [
-                'label' => 'concert'
+                'label' => 'Concerts'
             ],
             [
-                'label' => 'animation'
+                'label' => 'Animations'
             ],
             [
-                'label' => 'soiree'
+                'label' => 'Soiree'
             ],
         ];
 
