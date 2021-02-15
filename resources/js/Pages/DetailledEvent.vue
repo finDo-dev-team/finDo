@@ -12,8 +12,8 @@
           {{ event.date_start}}
         </p>
         <div class="font-bold text-xl mb-2">{{ event.title }}</div>
-        <p class="text-gray-700 text-base">
-          {{ event.description}}
+        <p class="text-gray-700 text-base" v-html="event.description">
+        
         </p>
       </div>
       <div> <img src="C:\Users\Aniss\finDo\public\images\5d0594d8b7279fbbbdc5b4131a3a0bb8.jpg	">  </div>
@@ -32,10 +32,10 @@
   
 </template>
 
-
 <script>
 import AppLayout from "../Layouts/AppLayout.vue";
 import MapEventComponent from "./Components/MapEventComponent"
+
 
 export default {
   components: {
@@ -46,6 +46,7 @@ export default {
   props: ["events"],
 
   data() {
+
     return {
       eventList: this.events,
     };
@@ -53,6 +54,7 @@ export default {
 
   mounted() {
     console.log(this.eventList);
+    document.getElementById('desc').innerHTML= events.description;
   },
 };
 </script>
