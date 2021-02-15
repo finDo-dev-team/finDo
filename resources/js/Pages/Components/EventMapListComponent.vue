@@ -63,7 +63,8 @@
           v-for="event in this.eventList"
           v-bind:key="event.id"
           :event="event"
-        ></EventListItem>
+        >
+        </EventListItem>
       </div>
     </div>
     <!-- Ligne Filtrage -->
@@ -311,5 +312,8 @@ export default {
 .no-scrollbar {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
+}
+.space{
+    margin-right: 1em;
 }
 </style>

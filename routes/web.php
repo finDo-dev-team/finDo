@@ -3,11 +3,13 @@
 use Inertia\Inertia;
 use Laravel\Jetstream\Rules\Role;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MapController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\DetailledEventController;
-use App\Http\Controllers\MapController;
+use App\Http\Controllers\ExportEventCalendarController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -27,11 +29,14 @@ Route::get('/', [HomeController::class, 'index'])->name('index');
 
 Route::get('/map/event', [SearchController::class, 'showSomeEventsOntoMap']);
 
-Route::get('/search/{q?}', [SearchController::class, 'index']);
+Route::get('/search/{q?}', [SearchController::class, 'index'])->name('seach');
 
 Route::get('/search2/{q?}', [SearchController::class, 'search']);
+Route::get('/search3/{distance?}', [EventController::class, 'getEventsWith']);
 
 Route::get('/DetailledEvent/{q?}', [DetailledEventController::class, 'index']);
+
+Route::get('/download/{id?}', [ExportEventCalendarController::class, 'calendar']);
 
 
 Route::get('/map',  [HomeController::class, 'showMap']);
