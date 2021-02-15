@@ -29,9 +29,10 @@ Route::get('/', [HomeController::class, 'index'])->name('index');
 
 Route::get('/map/event', [SearchController::class, 'showSomeEventsOntoMap']);
 
-Route::get('/search/{q?}', [SearchController::class, 'index']);
+Route::get('/search/{q?}', [SearchController::class, 'index'])->name('seach');
 
 Route::get('/search2/{q?}', [SearchController::class, 'search']);
+Route::get('/search3/{distance?}', [EventController::class, 'getEventsWith']);
 
 Route::get('/DetailledEvent/{q?}', [DetailledEventController::class, 'index']);
 
