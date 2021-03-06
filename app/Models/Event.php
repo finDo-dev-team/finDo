@@ -36,11 +36,20 @@ class Event extends Model
     {
         //Hash Titre (regex tout en miscule pas d'espace pas de tiret) + desc rapide 
 
-        $chaine=$this->title.$this->lead_text;
-
-        $hash= trim(strtolower(str_replace('.','',$chaine)));
-        $hash2=hash('ripemd128', $chaine);
+        $hash= $this->getInfoTrimed();
+        $hash2=hash('ripemd128', $hash);
         $this->checkSum= $hash2;
 
     }
+
+    public function getInfoTrimed() : string
+
+    {
+        $chaine=$this->title.$this->lead_text;
+        $chaine2= trim(strtolower(str_replace('.','',$chaine)));
+
+        return $chaine2;
+    }
+
+    
 }

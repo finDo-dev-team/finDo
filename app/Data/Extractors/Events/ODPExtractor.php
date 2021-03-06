@@ -71,7 +71,7 @@ class ODPExtractor implements APIExtractor {
             ->build();
         $event->addCheckSum();
 
-        if($this->checkSum($event)) $event->save();
+        if($this->checkSum($event)&& $this->checkIfSimilarExist($event)) $event->save();
         return $event;
     }
 
@@ -79,6 +79,23 @@ class ODPExtractor implements APIExtractor {
     {
         if (Event::where('checkSum', '=', $event->checkSum)->exists()) return false;
         else return true;
+
+    }
+
+    private function checkIfSimilarExist ($event) : bool 
+    {
+        $str1=$event->getInfoTrimed();
+        $Tabevents=Event::all();
+
+        foreach($Tabevents as $str2){
+           similar_text($str1,$str2->getInfoTrimed(),$percent); 
+           if ($percent>80) {
+               echo "Found similar with ".$percent."%";
+               return false;
+           }
+            
+        }
+        return true;
 
     }
 
