@@ -109,56 +109,56 @@ class ODPExtractor implements APIExtractor {
         if($eventOnBD->title==null && $event->title!=null ){
          $eventOnBD->title = $event->title;
          $eventOnBD->save();
-         echo "\n Added Missing title \n";
+         echo "\n Added Missing title in id: ".$eventOnBD->id;
         }
         if($eventOnBD->lead_text==null && $event->lead_text!=null){
         $eventOnBD->lead_text = $event->lead_text;
-        echo "\n Added Missing lead_text \n";
+        echo "\n Added Missing lead_text in id: ".$eventOnBD->id;
         $eventOnBD->save();
         }
         if($eventOnBD->description==null && $event->description!=null){
          $eventOnBD->description = $event->description;
-         echo "\n Added Missing description \n";
+         echo "\n Added Missing description in id: ".$eventOnBD->id;
          $eventOnBD->save();
         }
         if($eventOnBD->date_start==null && $event->date_start!=null){
          $eventOnBD->date_start = $event->date_start;
-         echo "\n Added Missing date_start \n";
+         echo "\n Added Missing date_start in id: ".$eventOnBD->id;
          $eventOnBD->save();
         }
         if($eventOnBD->date_end==null &&  $event->date_end!=null){
          $eventOnBD->date_end = $event->date_end;
-         echo "\n Added Missing date_end \n";
+         echo "\n Added Missing date_end in id: ".$eventOnBD->id;
          $eventOnBD->save();
         }
         if($eventOnBD->address_name==null && $event->address_name!=null){
          $eventOnBD->address_name = $event->address_name;
-         echo "\n Added Missing address_name \n";
+         echo "\n Added Missing address_name in id: ".$eventOnBD->id;
          $eventOnBD->save();
         }
         if($eventOnBD->address_city==null && $event->address_city!=null){
         $eventOnBD->address_city = $event->address_city;
-        echo "\n Added Missing address_city \n";
+        echo "\n Added Missing address_city in id: ".$eventOnBD->id;
         $eventOnBD->save();
         }
         if($eventOnBD->address_zipcode==null && $event->address_zipcode!=null){
          $eventOnBD->address_zipcode = $event->address_zipcode;
-         echo "\n Added Missing address_zipcode in id: \n".$eventOnBD->id;
+         echo "\n Added Missing address_zipcode in id: ".$eventOnBD->id;
          $eventOnBD->save();
         }
         if($eventOnBD->address_street==null && $event->address_street!=null){
          $eventOnBD->address_street = $event->address_street;
-         echo "\n Added Missing address_street \n";
+         echo "\n Added Missing address_street in id: ".$eventOnBD->id;
          $eventOnBD->save();
         }
         if($eventOnBD->latitude==null && $event->latitude!=null){
          $eventOnBD->latitude = $event->latitude;
-         echo "\n Added Missing latitude \n";
+         echo "\n Added Missing latitude in id: ".$eventOnBD->id;
          $eventOnBD->save();
         }
         if($eventOnBD->longitude==null && $event->longitude!=null){
         $eventOnBD->longitude = $event->longitude;
-        echo "\n Added Missing longitude \n";
+        echo "\n Added Missing longitude in id: ".$eventOnBD->id;
         $eventOnBD->save();
         }
 

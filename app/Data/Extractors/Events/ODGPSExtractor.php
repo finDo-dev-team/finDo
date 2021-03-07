@@ -7,11 +7,11 @@ use App\Models\EventType;
 use Illuminate\Support\Collection;
 use App\Models\Builder\EventBuilder;
 use Illuminate\Support\Facades\Http;
-use App\Data\Extractors\Events\ODIDFExtractor;
+use App\Data\Extractors\Events\ODGPSExtractor;
 
-class ODIDFExtractor implements APIExtractor {
+class ODGPSExtractor implements APIExtractor {
 
-    private static $queryNext2WeeksEvents = 'https://data.iledefrance.fr/api/records/1.0/search/?dataset=evenements-publics-cibul&q=date_start+%3E+%23now()+AND+date_start+%3C%3D+%23now(weeks%3D%2B2)&rows=1000';
+    private static $queryNext2WeeksEvents = 'https://data.grandparissud.fr/api/records/1.0/search/?dataset=evenements&q=start_at+%3E+%23now()+AND+end_at+%3C%3D+%23now(weeks%3D%2B2)&rows=1000';
    
     private array $records;
     private Collection $eventsCreated;
@@ -24,7 +24,7 @@ class ODIDFExtractor implements APIExtractor {
 
     public function addEventsToDB(): void
     {
-        $this->getRecordsFromApi(ODIDFExtractor::$queryNext2WeeksEvents);
+        $this->getRecordsFromApi(ODGPSExtractor::$queryNext2WeeksEvents);
         $this->createEventsFromRecords();
     }
 
@@ -45,10 +45,10 @@ class ODIDFExtractor implements APIExtractor {
     {
         $event = $this->createEventFields($record['fields']);
         
-      //  $eventType = $this->setEventType($record['fields']['category']);
+        /*$eventType = $this->setEventType($record['fields']['category']);
 
-      //  $this->attachEventTypeToEvent($event, $eventType);
-
+        $this->attachEventTypeToEvent($event, $eventType);
+*/
         $this->eventsCreated[] = $event;
     }
 
@@ -57,17 +57,20 @@ class ODIDFExtractor implements APIExtractor {
         $eventBuilder = new EventBuilder();
 
         $event = $eventBuilder
-            ->addTitle($fields['title'])
-            ->addLeadText($fields['description'])
-            ->addDescription($fields['free_text'])
-            ->addDateStart(Carbon::create($fields['date_start']))
-            ->addDateEnd(Carbon::create($fields['date_end']))
-            ->addAddressName($fields['address'])
-            ->addLatitude($fields['latlon'][0])
-            ->addLongitude($fields['latlon'][1])
+            ->addTitle($fields['full_name'])
+            ->addLeadText($fields['full_text_description'])
+            ->addDescription($fields['rich_description'])
+            ->addDateStart(Carbon::create($fields['start_at']))
+            ->addDateEnd(Carbon::create($fields['end_at']))
+            ->addAddressCity($fields['city'])
+            ->addAddressZipCode($fields['postal_code'])
+            ->addAddressStreet($fields['geographic_address'])
+            ->addLatitude($fields['geo_coordinates'][0])
+            ->addLongitude($fields['geo_coordinates'][1])
             ->build();
         $event->addCheckSum();
 
+        
         if($this->checkSum($event)&& $this->checkIfSimilarExist($event)) $event->save();
         return $event;
     }
@@ -160,6 +163,7 @@ class ODIDFExtractor implements APIExtractor {
         }
 
     }
+
 
     private function setEventType(?string $label)
     {
