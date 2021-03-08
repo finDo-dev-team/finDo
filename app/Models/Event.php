@@ -25,6 +25,16 @@ class Event extends Model
         return $this->belongsToMany('App\Models\EventType');
     }
 
+    /**
+     * Définit la relation "Many To Many" entre Event et User.
+     * 
+     * @return Illuminate\Database\Eloquent\Concerns\HasRelationships::belongsToMany
+     */
+    public function users()
+    {
+        return $this->belongsToMany('App\Models\User');
+    }
+
     public function addLatLngField()
     {
         $latLng = array();

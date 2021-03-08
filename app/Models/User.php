@@ -58,4 +58,14 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    /**
+     * Définit la relation "Many To Many" entre User et Event.
+     * 
+     * @return Illuminate\Database\Eloquent\Concerns\HasRelationships::belongsToMany
+     */
+    public function events()
+    {
+        return $this->belongsToMany('App\Models\Event');
+    }
 }

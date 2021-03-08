@@ -10,8 +10,9 @@
             </div>
 
             <div class="mt-6 text-gray-500">
-                Vous pouvez retrouver ici ...
+                ...
             </div>
+
         </div>
     </div>
 </template>

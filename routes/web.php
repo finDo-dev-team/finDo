@@ -9,6 +9,7 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\DetailledEventController;
 use App\Http\Controllers\ExportEventCalendarController;
+use App\Http\Controllers\DashboardController;
 
 
 /*
@@ -51,6 +52,4 @@ Route::get('/mapRefonte', [MapController::class, 'index']);
 
 
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->name('dashboard');
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
