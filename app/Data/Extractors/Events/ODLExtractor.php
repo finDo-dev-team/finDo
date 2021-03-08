@@ -7,11 +7,11 @@ use App\Models\EventType;
 use Illuminate\Support\Collection;
 use App\Models\Builder\EventBuilder;
 use Illuminate\Support\Facades\Http;
-use App\Data\Extractors\Events\ODIDFExtractor;
+use App\Data\Extractors\Events\ODLExtractor;
 
-class ODIDFExtractor implements APIExtractor {
+class ODLExtractor implements APIExtractor {
 
-    private static $queryNext2WeeksEvents = 'https://data.iledefrance.fr/api/records/1.0/search/?dataset=evenements-publics-cibul&q=date_start+%3E+%23now()+AND+date_start+%3C%3D+%23now(weeks%3D%2B2)&rows=1000';
+    private static $queryNext2WeeksEvents = 'https://opendata.lillemetropole.fr/api/records/1.0/search/?dataset=evenements-publics-openagenda&q=date_start+%3E+%23now()+AND+date_start+%3C%3D+%23now(weeks%3D%2B2)&rows=1000';
    
     private array $records;
     private Collection $eventsCreated;
@@ -24,7 +24,7 @@ class ODIDFExtractor implements APIExtractor {
 
     public function addEventsToDB(): void
     {
-        $this->getRecordsFromApi(ODIDFExtractor::$queryNext2WeeksEvents);
+        $this->getRecordsFromApi(ODLExtractor::$queryNext2WeeksEvents);
         $this->createEventsFromRecords();
     }
 
@@ -63,6 +63,7 @@ class ODIDFExtractor implements APIExtractor {
             ->addDateStart(Carbon::create($fields['date_start']))
             ->addDateEnd(Carbon::create($fields['date_end']))
             ->addAddressName($fields['address'])
+            ->addAddressCity($fields['city'])
             ->addLatitude($fields['latlon'][0])
             ->addLongitude($fields['latlon'][1])
             ->build();
