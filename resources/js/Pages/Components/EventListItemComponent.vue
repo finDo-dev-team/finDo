@@ -12,13 +12,15 @@
             class="flex-1 select-none bg-red-200 rounded-full text-sm text-white px-1 py-0.5 hover:bg-red-300 duration-200 ease-in-out"
           >
             {{ type.label }}
-
-          </span>
-                &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-          <span class=" inline-block ">
-            <a :href="'/download/' + event.id" class="rounded-full bg-red-400 text-white px-1 py-0.5 focus:bg-red-800 duration-200 ease-in-out">Ajouter au calendrier</a>
           </span>
         </div>
+        <span class=" inline-block ">
+            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+            <a :href="'/download/' + event.id" class="rounded-full bg-red-400 text-white px-1 py-0.5 focus:bg-red-800 duration-200 ease-in-out">Ajouter au calendrier</a>
+        </span>
+        <span>
+
+        </span>
       </div>
       <div class="font-bold text-xl mb-2">{{ event.title }}</div>
       <p class="text-gray-700 text-base">
