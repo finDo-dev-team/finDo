@@ -10,7 +10,7 @@ use App\Http\Controllers\SearchController;
 use App\Http\Controllers\DetailledEventController;
 use App\Http\Controllers\ExportEventCalendarController;
 use App\Http\Controllers\DashboardController;
-
+use App\Http\Controllers\SocialiteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,7 +30,7 @@ Route::get('/', [HomeController::class, 'index'])->name('index');
 
 Route::get('/map/event', [SearchController::class, 'showSomeEventsOntoMap']);
 
-Route::get('/search/{q?}', [SearchController::class, 'index'])->name('seach');
+Route::get('/search/{q?}', [SearchController::class, 'index'])->name('search');
 
 Route::get('/search2/{q?}', [SearchController::class, 'search']);
 Route::get('/search3/{distance?}', [EventController::class, 'getEventsWith']);
@@ -53,3 +53,15 @@ Route::get('/mapRefonte', [MapController::class, 'index']);
 
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+
+# Socialite URLs
+
+// La page où on présente les liens de redirection vers les providers
+Route::get("login-register", [SocialiteController::class, 'loginRegister']);
+
+// La redirection vers le provider
+Route::get("redirect/{provider}", [SocialiteController::class, 'redirect'])->name('socialite.redirect');
+
+// Le callback du provider
+Route::get("callback/{provider}", [SocialiteController::class, 'callback'])->name('socialite.callback');

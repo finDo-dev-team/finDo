@@ -16,6 +16,7 @@
         "laravel/framework": "^8.0",
         "laravel/jetstream": "^1.3",
         "laravel/sanctum": "^2.6",
+        "laravel/socialite": "^5.2",
         "laravel/tinker": "^2.0",
         "victorybiz/geoip-location": "^1.1"
     },
