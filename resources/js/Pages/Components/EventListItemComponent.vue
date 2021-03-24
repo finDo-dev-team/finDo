@@ -18,8 +18,11 @@
             &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
             <a :href="'/download/' + event.id" class="rounded-full bg-red-400 text-white px-1 py-0.5 focus:bg-red-800 duration-200 ease-in-out">Ajouter au calendrier</a>
         </span>
+        &emsp;
         <span>
 
+            <ShareEvent :event="event">
+            </ShareEvent>
         </span>
       </div>
       <div class="font-bold text-xl mb-2">{{ event.title }}</div>
@@ -37,10 +40,13 @@
 </template>
 
 <script>
-
+import ShareEvent from "./ShareEventComponent";
 export default {
-  name: "EventListItem",
-  props: ["event"],
+    name: "EventListItem",
+    props: ["event"],
+    components: {
+        ShareEvent,
+    },
 };
 </script>
 
