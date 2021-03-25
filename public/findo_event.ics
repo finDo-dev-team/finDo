@@ -1,0 +1,12 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//LFP//iCal 3.0//FR
+BEGIN:VEVENT
+X-WR-TIMEZONE:Europe/Paris
+SUMMARY:Brancion
+LOCATION:1 rue de la Paix 75015 Paris, Insérer ici le nom de l'adresse
+DTSTART:20200130T180000
+DTEND:20200130T190000
+DESCRIPTION:Suspendisse a scelerisque libero. Aliquam cursus nulla turpis, vel lobortis nibh ultricies eu.
+END:VEVENT
+END:VCALENDAR

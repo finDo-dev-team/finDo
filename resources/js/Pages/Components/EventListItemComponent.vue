@@ -2,10 +2,17 @@
   <div
     class="rounded overflow-hidden mb-2 shadow bg-white relative hover:shadow-2xl duration-500 ease-in-out"
   >
+
     <div class="px-6 py-4 mb-16">
       <p class="text-gray-600 text-xs">
         {{ event.date_start }}
       </p>
+        <div>
+          <span style="float:right;">
+            <ShareEvent :event="event">
+            </ShareEvent>
+          </span>
+        </div>
       <div class="inline-flex">
         <div class="px-0.5 relative" v-for="type in event.types" v-bind:key="type.id">
           <span
@@ -14,16 +21,6 @@
             {{ type.label }}
           </span>
         </div>
-        <span class=" inline-block ">
-            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-            <a :href="'/download/' + event.id" class="rounded-full bg-red-400 text-white px-1 py-0.5 focus:bg-red-800 duration-200 ease-in-out">Ajouter au calendrier</a>
-        </span>
-        &emsp;
-        <span>
-
-            <ShareEvent :event="event">
-            </ShareEvent>
-        </span>
       </div>
       <div class="font-bold text-xl mb-2">{{ event.title }}</div>
       <p class="text-gray-700 text-base">
