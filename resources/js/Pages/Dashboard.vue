@@ -8,7 +8,7 @@
           <div class="p-4 text-xl">
             Vos événements enregistrés:
           </div>
-         <div><calendar>
+         <div><calendar :attributes='attrs'>
         </calendar></div>
           <ul>
             <li v-for="event in eventList" v-bind:key="event.id">
@@ -41,7 +41,14 @@ export default {
   data() {
     return {
       eventList: this.events,
+        attrs: this.attributCalendar(),
     };
+  },
+
+  methods:{
+attributCalendar: function () {
+    
+    },
   },
 
   mounted() {
