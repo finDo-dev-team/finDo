@@ -1,7 +1,6 @@
 <template>
   <app-layout>
     <template #header> Mon espace </template>
-
     <div class="py-12">
       <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
@@ -9,6 +8,8 @@
           <div class="p-4 text-xl">
             Vos événements enregistrés:
           </div>
+         <div><calendar>
+        </calendar></div>
           <ul>
             <li v-for="event in eventList" v-bind:key="event.id">
               <ul>
@@ -26,10 +27,12 @@
 <script>
 import AppLayout from "./../Layouts/AppLayout";
 import Welcome from "./../Jetstream/Welcome";
+import Calendar from 'v-calendar/lib/components/calendar.umd'
 
 export default {
   components: {
     AppLayout,
+     Calendar,
     Welcome,
   },
 
