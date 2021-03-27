@@ -19,7 +19,7 @@ import '@fortawesome/fontawesome-free/js/all.js';
 
         data() {
             return {
-                url: window.location.host+'%2FDetailledEvent%2F'+this.event.id,
+                url: 'http%3A%2F%2F'+window.location.host+'%2FDetailledEvent%2F'+this.event.id,
                 title: this.event.lead_text,
                 providers: {
                     facebook: 'https://www.facebook.com/sharer.php?u=:u&title=:text',
