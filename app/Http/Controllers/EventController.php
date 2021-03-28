@@ -147,6 +147,8 @@ class EventController extends Controller
             $user = Auth::user();
             $user->events()->attach($id);
         }
+        $events = Event::where('id', 'like', $id)->get();
+         return Inertia::render('DetailledEvent', compact('events'));   
     }
 
     /**
