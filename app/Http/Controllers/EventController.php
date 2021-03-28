@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 use Facade\Ignition\ErrorPage\Renderer;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
+use Auth;
 use GeoIPLocation;
 
 /**
@@ -139,6 +140,15 @@ class EventController extends Controller
             return Redirect::route('seach');
         }
     }
+
+    public function addEventToUserCalendar($id)
+    {
+        if (Auth::check()) {
+            $user = Auth::user();
+            $user->events()->attach($id);
+        }
+    }
+
     /**
      * Display the specified resource.
      *
