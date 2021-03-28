@@ -52,6 +52,9 @@ export default {
           dates: new Date(Date.parse(event.date_start)),
           highlight: true,
           dot: true,
+          popover: {
+            label: event.title,
+          },
         });
       });
       console.log(this.eventList);
