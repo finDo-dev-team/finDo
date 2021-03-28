@@ -1,16 +1,20 @@
 <?php
 
 use Inertia\Inertia;
+
+use Spatie\GoogleCalendar\Event;
+
 use Laravel\Jetstream\Rules\Role;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MapController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\SearchController;
-use App\Http\Controllers\DetailledEventController;
-use App\Http\Controllers\ExportEventCalendarController;
+use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SocialiteController;
+use App\Http\Controllers\DetailledEventController;
+use App\Http\Controllers\ExportEventCalendarController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +30,19 @@ use App\Http\Controllers\SocialiteController;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
+/*
+Route::get('/test', function () {
+
+    $event = new Event;
+
+$event->name = 'A new event';
+$event->startDateTime = Carbon\Carbon::now();
+$event->endDateTime = Carbon\Carbon::now()->addHour();
+
+$event->save();
+    
+});*/
+
 Route::get('/', [HomeController::class, 'index'])->name('index');
 
 Route::get('/map/event', [SearchController::class, 'showSomeEventsOntoMap']);
@@ -39,6 +56,11 @@ Route::get('/DetailledEvent/{q?}', [DetailledEventController::class, 'index']);
 
 Route::get('/download/{id?}', [ExportEventCalendarController::class, 'calendar']);
 
+Route::get('/download/{id?}', [ExportEventCalendarController::class, 'calendar']);
+
+//Route::get('/test', [CalendarController::class, 'addEventToCalendar']);
+
+Route::get('/addGoogle/{id?}', [CalendarController::class, 'addEventToCalendar']);
 
 Route::get('/map',  [HomeController::class, 'showMap']);
 

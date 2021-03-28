@@ -24,7 +24,9 @@ class SocialiteController extends Controller
  
          // On vérifie si le provider est autorisé
          if (in_array($provider, $this->providers)) {
-             return Socialite::driver($provider)->redirect(); // On redirige vers le provider
+             return Socialite::driver($provider)
+             ->scopes(['openid','profile','email','https://www.googleapis.com/auth/calendar'])
+             ->redirect(); // On redirige vers le provider
          }
          abort(404); // Si le provider n'est pas autorisé
      }
@@ -43,6 +45,7 @@ class SocialiteController extends Controller
 
             $email = $data->getEmail(); // L'adresse email
             $name = $data->getName(); // le nom
+            
 
             # 1. On récupère l'utilisateur à partir de l'adresse email
             $user = User::where("email", $email)->first();
@@ -64,11 +67,13 @@ class SocialiteController extends Controller
                     'password' => bcrypt("emilie") // On attribue un mot de passe
                 ]);
             }
+            
 
             # 4. On connecte l'utilisateur
+            $token = $data->token;
             auth()->login($user);
 
-            # 5. On redirige l'utilisateur vers /home
+            # 5. On redirige l'utilisateur vers /dashboard
             if (auth()->check()) return redirect('/dashboard');
 
          }
