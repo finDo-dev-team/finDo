@@ -50,6 +50,6 @@ Route::post('/event/store', [EventController::class, 'store']);
 
 Route::get('/mapRefonte', [MapController::class, 'index']);
 
-
+Route::get('/addEvent/{id}', [EventController::class, 'addEventToUserCalendar']);
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
