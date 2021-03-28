@@ -18,6 +18,9 @@
           <span class=" inline-block ">
             <a :href="'/download/' + event.id" class="rounded-full bg-red-400 text-white px-1 py-0.5 focus:bg-red-800 duration-200 ease-in-out">Ajouter au calendrier</a>
           </span>
+          <span class=" inline-block ">
+            <a :href="'/addGoogle/' + event.id" class="rounded-full bg-red-400 text-white px-1 py-0.5 focus:bg-red-800 duration-200 ease-in-out">Ajouter a google</a>
+          </span>
         </div>
       </div>
       <div class="font-bold text-xl mb-2">{{ event.title }}</div>
