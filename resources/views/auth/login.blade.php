@@ -31,6 +31,17 @@
                     <span class="ml-2 text-sm text-gray-600">{{ __('Se souvenir de moi') }}</span>
                 </label>
             </div>
+            
+            <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
+
+<div class="google-btn" >
+  <div class="mb-4 mt-4 ">
+    <a href="redirect/google" >
+    <img class="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"  width="40px"/>
+    </a>
+  </div>
+</div>
+            
 
             <div class="flex items-center justify-end mt-4">
                 @if (Route::has('password.request'))
