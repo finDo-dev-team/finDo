@@ -14,17 +14,6 @@ class App {
         $odpExtractor = new ODPExtractor();
         $odpExtractor->addEventsToDB();
 
-        $odsExtractor = new ODSExtractor();
-        $odsExtractor->addEventsToDB();
-
-        $odidfExtractor = new ODIDFExtractor();
-        $odidfExtractor->addEventsToDB();
-
-        $odgpsExtractor = new ODGPSExtractor();
-        $odgpsExtractor->addEventsToDB();
-
-        $odlExtractor = new ODLExtractor();
-        $odlExtractor->addEventsToDB();
     
     }
 }
