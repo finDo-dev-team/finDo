@@ -1,5 +1,6 @@
 <template>
     <div>
+        <a :href="'/addGoogle/' + event.id" class="btn-space"><i class="icon-color fab fa-google"></i></a>
         <a :href="'/download/' + event.id" class="btn-space"><i class="icon-color far fa-calendar-alt"></i></a>
         <a  class=" btn-space pointer" @click.prevent="shareTweeter()"><i class=" icon-color fab fa-twitter"></i></a>
         <a class="btn-space pointer" @click.prevent="shareFacebook()"><i class="icon-color fab fa-facebook"></i></a>
