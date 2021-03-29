@@ -23,3 +23,6 @@ eloquent-relation-diagram.png
 /.phpdoc
 /doc
 doc.zip
+
+*.ics
+composer.phar

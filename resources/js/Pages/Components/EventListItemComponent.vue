@@ -2,21 +2,26 @@
   <div
     class="rounded overflow-hidden mb-2 shadow bg-white relative hover:shadow-2xl duration-500 ease-in-out"
   >
+
     <div class="px-6 py-4 mb-16">
       <p class="text-gray-600 text-xs">
         {{ event.date_start }}
       </p>
+        <div>
+          <span style="float:right;">
+            <ShareEvent :event="event">
+            </ShareEvent>
+          </span>
+        </div>
       <div class="inline-flex">
         <div class="px-0.5 relative" v-for="type in event.types" v-bind:key="type.id">
           <span
             class="flex-1 select-none bg-red-200 rounded-full text-sm text-white px-1 py-0.5 hover:bg-red-300 duration-200 ease-in-out"
           >
             {{ type.label }}
-
           </span>
-                &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
           <span class=" inline-block ">
-            <a :href="'/download/' + event.id" class="rounded-full bg-red-400 text-white px-1 py-0.5 focus:bg-red-800 duration-200 ease-in-out">Ajouter au calendrier</a>
+            <a :href="'/addGoogle/' + event.id" class="rounded-full bg-red-400 text-white px-1 py-0.5 focus:bg-red-800 duration-200 ease-in-out">Ajouter a google</a>
           </span>
         </div>
       </div>
@@ -35,10 +40,13 @@
 </template>
 
 <script>
-
+import ShareEvent from "./ShareEventComponent";
 export default {
-  name: "EventListItem",
-  props: ["event"],
+    name: "EventListItem",
+    props: ["event"],
+    components: {
+        ShareEvent,
+    },
 };
 </script>
 
